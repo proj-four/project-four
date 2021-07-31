@@ -1,6 +1,8 @@
+import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import colors from './variables/colors';
+import 
 
 function App() {
 
@@ -20,7 +22,7 @@ function App() {
 
   return  (
   <div>
-    <h1>HELLO</h1>
+    <Heading>HELLO</Heading>
   </div>
 
   )
@@ -28,6 +30,9 @@ function App() {
 
 export default App;
 
+const Heading = styled.h1`
+background: ${colors.white};
+`
 
 
 
