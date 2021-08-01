@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import colors from "../variables/colors";
-import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
+import InnerWrapper from "./InnerWrapper.styled";
+import OuterWrapper from "./OuterWrapper.styled";
+
+import Header from "./Header";
 
 function App() {
   const [showsData, setShowsData] = useState([]);
@@ -11,7 +14,11 @@ function App() {
   return (
     <div>
       <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-        <SearchBar />
+        <OuterWrapper>
+          <InnerWrapper>
+            <Header />
+          </InnerWrapper>
+        </OuterWrapper>
       </ShowsDataContext.Provider>
     </div>
   );
