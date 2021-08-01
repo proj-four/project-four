@@ -120,8 +120,4 @@ const SearchButton = styled.button`
   background: none;
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  ${SearchInput}:active + & , ${SearchInput}:focus + & {
-    color: ${cyan2};
-  }
-`;
+const Icon = styled(FontAwesomeIcon)``;
