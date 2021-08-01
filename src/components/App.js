@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import firebase from "firebase";
+import firebase from "../firebase";
 import colors from "../variables/colors";
 import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
