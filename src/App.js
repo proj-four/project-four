@@ -1,23 +1,35 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import colors from "../variables/colors";
-import SearchBar from "./SearchBar";
-import ShowsDataContext from "../contexts/ShowsDataContext";
+import colors from "./variables/colors";
 
 function App() {
-  const [showsData, setShowsData] = useState([]);
+  useEffect(() => {
+    axios({
+      url: "https://api.tvmaze.com/shows/139/images",
+      method: "GET",
+      dataResponse: "json",
+      params: {
+        api_key: "Y6sBDEBiE9eU7nhyUf5NOycV9IzoiwYQ",
+        q: "girls",
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  });
 
   return (
     <div>
-      <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-        <SearchBar />
-      </ShowsDataContext.Provider>
+      <Heading>HELLO</Heading>
     </div>
   );
 }
 
 export default App;
+
+const Heading = styled.h1`
+  background: ${colors.white};
+`;
 
 // PSUEDO CODE ------------------------
 
