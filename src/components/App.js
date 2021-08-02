@@ -5,6 +5,7 @@ import SavedShowsContext from "../contexts/SavedShowsContext";
 
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
+import SearchResult from "./SearchResult";
 
 function App() {
   // Saves user's search results
@@ -35,10 +36,11 @@ function App() {
 
   return (
     <div>
-      <SavedShowsContext.Provider value={[showsData, setShowsData]}>
-        <ShowsDataContext.Provider value={[savedShows, setSavedShows]}>
+      <SavedShowsContext.Provider value={[savedShows, setSavedShows]}>
+        <ShowsDataContext.Provider value={[showsData, setShowsData]}>
           <OuterWrapper>
             <Header />
+            <SearchResult />
           </OuterWrapper>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>
