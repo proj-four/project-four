@@ -1,4 +1,9 @@
-import { useState } from "react";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import firebase from "../firebase";
+import colors from "../variables/colors";
+import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
