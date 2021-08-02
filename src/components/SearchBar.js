@@ -3,9 +3,10 @@ import styled from "styled-components";
 import axios from "axios";
 import { baseUrl, apiKey } from "../variables/api";
 import ShowsDataContext from "../contexts/ShowsDataContext";
-import { black, cyan2, grey, white } from "../variables/colors";
+import { black, black2, cyan2, grey, white } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { IconBtn } from "./Buttons";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,9 +56,15 @@ const SearchBar = () => {
             onChange={handleChange}
           />
           <SearchLabel htmlFor="search">Search shows</SearchLabel>
-          <SearchButton type="submit" onClick={handleSubmit}>
-            <Icon icon={faSearch} />
-          </SearchButton>
+          <BtnContainer>
+            <SearchBtn type="submit" onClick={handleSubmit}>
+              <Icon icon={faSearch} />
+            </SearchBtn>
+            <Vertical />
+            <ResetBtn type="reset">
+              <Icon icon={faTimes} />
+            </ResetBtn>
+          </BtnContainer>
         </SearchField>
       </form>
     </div>
@@ -71,7 +78,6 @@ const margin = "20.5px 16px";
 
 const SearchField = styled.div`
   position: relative;
-  display: inline-block;
 `;
 
 const SearchInput = styled.input`
@@ -79,6 +85,7 @@ const SearchInput = styled.input`
   border: 1px solid ${grey};
   border-radius: 5px;
   margin: 5px;
+  width: 100%;
 
   &:hover {
     margin: 4px;
@@ -103,21 +110,38 @@ const SearchLabel = styled.label`
   transition: 0.3s all ease-in-out;
   background-color: ${white};
   pointer-events: none;
+  border-radius: 5px;
 
   ${SearchInput}:active + &, ${SearchInput}:focus + & {
     transform: translate(-10px, -28px) scale(0.7);
     color: ${cyan2};
+    font-weight: 700;
   }
 `;
 
-const SearchButton = styled.button`
+const BtnContainer = styled.div`
   position: absolute;
   top: 0;
-  right: 0px;
   bottom: 0;
+  right: 0;
   margin-right: 14px;
-  border: none;
-  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SearchBtn = styled(IconBtn)`
+  margin-right: 3px;
+`;
+
+const ResetBtn = styled(IconBtn)`
+  margin-left: 3px;
+`;
+
+const Vertical = styled.div`
+  height: 45%;
+  width: 1px;
+  background-color: ${black2};
 `;
 
 const Icon = styled(FontAwesomeIcon)``;

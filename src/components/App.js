@@ -5,6 +5,8 @@ import firebase from "../firebase";
 import colors from "../variables/colors";
 import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
+import OuterWrapper from "./OuterWrapper.styled";
+import Header from "./Header";
 
 function App() {
   const [showsData, setShowsData] = useState([]);
@@ -12,7 +14,9 @@ function App() {
   return (
     <div>
       <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-        <SearchBar />
+        <OuterWrapper>
+          <Header />
+        </OuterWrapper>
       </ShowsDataContext.Provider>
     </div>
   );
