@@ -1,11 +1,6 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import colors from "../variables/colors";
+import { useState } from "react";
 import ShowsDataContext from "../contexts/ShowsDataContext";
-import InnerWrapper from "./InnerWrapper.styled";
 import OuterWrapper from "./OuterWrapper.styled";
-
 import Header from "./Header";
 
 function App() {
@@ -15,9 +10,7 @@ function App() {
     <div>
       <ShowsDataContext.Provider value={[showsData, setShowsData]}>
         <OuterWrapper>
-          <InnerWrapper>
-            <Header />
-          </InnerWrapper>
+          <Header />
         </OuterWrapper>
       </ShowsDataContext.Provider>
     </div>

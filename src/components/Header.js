@@ -1,14 +1,24 @@
 import styled from "styled-components";
-import SearchBar from "./SearchBar";
+import Nav from "./Nav";
+import Search from "./Search";
 
 const Header = () => {
   return (
-    <Wrapper>
-      <SearchBar />
-    </Wrapper>
+    <HeaderWrapper>
+      <Nav />
+      <Search />
+    </HeaderWrapper>
   );
 };
 
 export default Header;
 
-const Wrapper = styled.div``;
+const HeaderWrapper = styled.header`
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: "nav" "search";
+`;
