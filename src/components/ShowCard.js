@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
-import { black, black2, cyan1, cyan2, grey, white } from "../variables/colors";
+import { black, black1, black2, cyan1, cyan2, grey, white } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import styled from "styled-components";
 import ListOptions from "./ListOptions";
+import {IconBtn} from "./Buttons";
 
 const ShowCard = (props) => {
   const showObj = props.showObj;
@@ -43,8 +44,21 @@ const ShowCard = (props) => {
     return finalSummary;
   };
 
+  // const finalGenre = genres.map((genre) => {
+  //   let genre = null;
+
+  //   if (genre === null || genre === undefined) {
+  //     genre = "";
+  //   } else {
+  //     genre = genre;
+  //   }
+  //   return genre;
+  // })
+
+
   const score = Math.floor(showObj.score * 100);
   const finalSummary = formatSummary(summary);
+  // const finalGenres = changeGenres(genres);
 
   const toggleListMenu = () => {
     setListMenuOpen(listMenuOpen?false:true);
@@ -53,9 +67,9 @@ const ShowCard = (props) => {
   return (
     <Card key={id}>
       {image ? (
-        <img src={image.medium} alt={`Poster of ${name}`} />
+        <Image src={image.medium} alt={`Poster of ${name}`} />
       ) : (
-        <img src={noImageFound} alt="No image found" />
+        <Image src={noImageFound} alt="No image found" />
       )}
       <Button>
         <Icon icon={faThumbsUp} />
@@ -63,6 +77,9 @@ const ShowCard = (props) => {
       <Button>
         <Icon icon={faThumbsDown} />
       </Button>
+      <Genres>{genres}</Genres>
+      <Score>{score}%</Score>
+      <Title>{name}</Title>
       <Button onClick={toggleListMenu}>
         <Icon icon={listMenuOpen?faMinus:faPlus} />
         <ListOptions isOpen={listMenuOpen}/>
@@ -72,6 +89,7 @@ const ShowCard = (props) => {
       <p>{language}</p>
       <Summary>{formattedSummary ? formattedSummary : finalSummary}</Summary>
       <Load onClick={() => handleLoadMore(summary)}>Load More</Load>
+      <Language>{language}</Language>
     </Card>
   );
 };
@@ -82,29 +100,28 @@ export default ShowCard;
 
 const Card = styled.li`
   margin-right: 10px;
+  position: relative;
 `;
 
-const Button = styled.button`
-position:relative;
+const Button = styled(IconBtn)`
 border-radius: 50%;
-padding:15px;
-margin-top:5px;
-font-size:20px;
-border: 1px solid ${grey};
+border: 1px solid ${cyan2};
 margin-right: 5px;
 `;
 
-const Name = styled.p`
-font-size: 3rem
-color: ${grey};
+const Title = styled.p`
+margin: 0;
+font-size: 1.5rem;
+font-weight: bold;
+color: ${white};
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-color: ${black};
 `;
 
 const Summary = styled.p`
 color: ${grey};
+font-size: 0.9rem;
 `;
 
 const Load = styled.button`
@@ -115,4 +132,29 @@ position: relative;
 top: -10px;
 right: -100px;
 font-size: 0.8rem;
+`;
+
+const Image = styled.img`
+width: 210px;
+height: 295px;
+position: relative;
+`;
+
+const Genres = styled.p`
+position: absolute;
+top: 250px;
+left: 5px;
+padding: 3px 7px;
+color: ${cyan1};
+background-color: ${black1};
+`;
+
+const Score = styled.p`
+display: inline-block;
+color: ${white};
+`;
+
+const Language = styled.p`
+color: ${cyan2};
+margin: 0;
 `;
