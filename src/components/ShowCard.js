@@ -2,10 +2,9 @@ import { useState, useContext } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
 import { black, black2, cyan1, cyan2, grey, white } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import styled from "styled-components";
-import { ListenOptionItem } from "./ListOptionItem";
 
 const ShowCard = (props) => {
   const showObj = props.showObj;
@@ -57,9 +56,6 @@ const ShowCard = (props) => {
       </Button>
       <Button>
         <Icon icon={faThumbsDown} />
-      </Button>
-      <Button>
-        <Icon icon={faPlus} />
       </Button>
       <Name>{name}</Name>
       <p>{score}%</p>

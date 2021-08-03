@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components/macro";
 import axios from "axios";
 import { baseUrl, apiKey } from "../variables/api";
 import ShowsDataContext from "../contexts/ShowsDataContext";
@@ -44,6 +44,11 @@ const SearchBar = () => {
     e.preventDefault();
   };
 
+  const handleReset = (e) => {
+    setSearchQuery("");
+    setShowsData([]);
+  };
+
   return (
     <div>
       <form>
@@ -55,13 +60,15 @@ const SearchBar = () => {
             value={searchQuery}
             onChange={handleChange}
           />
-          <SearchLabel htmlFor="search">Search shows</SearchLabel>
+          <SearchLabel htmlFor="search" input={searchQuery}>
+            Search shows
+          </SearchLabel>
           <BtnContainer>
             <SearchBtn type="submit" onClick={handleSubmit}>
               <Icon icon={faSearch} />
             </SearchBtn>
             <Vertical />
-            <ResetBtn type="reset">
+            <ResetBtn type="reset" onClick={handleReset}>
               <Icon icon={faTimes} />
             </ResetBtn>
           </BtnContainer>
@@ -111,6 +118,16 @@ const SearchLabel = styled.label`
   background-color: ${white};
   pointer-events: none;
   border-radius: 5px;
+
+  ${({ input }) => {
+    if (input.length !== 0) {
+      return css`
+        transform: translate(-10px, -28px) scale(0.7);
+        color: ${cyan2};
+        font-weight: 700;
+      `;
+    }
+  }}
 
   ${SearchInput}:active + &, ${SearchInput}:focus + & {
     transform: translate(-10px, -28px) scale(0.7);
