@@ -15,7 +15,7 @@ const Nav = () => {
     <NavWrapper>
       <Logo />
       {displayCreateList && <CreateList />}
-      <PrimaryBtn onClick={handleClick}>Create list</PrimaryBtn>
+      <PrimaryBtn onClick={handleClick}>New list</PrimaryBtn>
     </NavWrapper>
   );
 };

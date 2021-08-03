@@ -13,7 +13,7 @@ const CreateList = () => {
     // Create a reference to the specific list created by the user
     const listRef = dbRef.child(listName);
 
-    listRef.on("value", (response) => {
+    listRef.once("value", (response) => {
       // Check if the list being created by the user already exists or not before creating a new one
       const exists = response.val();
 
@@ -37,7 +37,7 @@ const CreateList = () => {
           onChange={(e) => setListName(e.target.value)}
         />
         <button type="submit" onClick={handleSubmit}>
-          Create list
+          Create
         </button>
       </form>
     </div>
