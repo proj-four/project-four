@@ -25,7 +25,8 @@ function App() {
       // Loop through response from firebase to save it into the preferred data structure
       // Data structure: {list: [shows], list2: [shows2]}
       for (const list in data) {
-        const shows = Object.values(data[list]);
+        // If the list is falsy, there are no shows saved to the list, so return an empty array
+        const shows = list ? Object.values(data[list]) : [];
         savedShowsTemp[list] = shows;
       }
 
