@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
+import SearchResult from "./SearchResult";
 
 function App() {
   const [showsData, setShowsData] = useState([]);
@@ -16,6 +17,7 @@ function App() {
       <ShowsDataContext.Provider value={[showsData, setShowsData]}>
         <OuterWrapper>
           <Header />
+          <SearchResult />
         </OuterWrapper>
       </ShowsDataContext.Provider>
     </div>
@@ -47,10 +49,6 @@ export default App;
 //   favAction: "",
 //   favDrama: "",
 // };
-
-// need a way to fetch id of the create list 
-
-// also need an endpoint or api call to add the tv show to the list 
 
 // SEARCH BAR COMPONENT
 
