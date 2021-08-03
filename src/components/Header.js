@@ -15,6 +15,7 @@ export default Header;
 
 const HeaderWrapper = styled.header`
   max-width: 1200px;
+  width: 90%;
   height: 100%;
   margin: 0 auto;
   display: grid;

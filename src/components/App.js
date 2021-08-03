@@ -1,25 +1,50 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import firebase from "../firebase";
-import colors from "../variables/colors";
-import SearchBar from "./SearchBar";
 import ShowsDataContext from "../contexts/ShowsDataContext";
+import SavedShowsContext from "../contexts/SavedShowsContext";
+
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 
 function App() {
+  // Saves user's search results
   const [showsData, setShowsData] = useState([]);
+
+  // Saves data retrieved from firebase
+  const [savedShows, setSavedShows] = useState([]);
+
+  useEffect(() => {
+    // Establish connection to firebase
+    const dbRef = firebase.database().ref();
+
+    dbRef.on("value", (response) => {
+      const data = response.val();
+      const savedShowsTemp = {};
+
+      // Loop through response from firebase to save it into the preferred data structure
+      // Data structure: {list: [shows], list2: [shows2]}
+      for (const list in data) {
+        // If the list is falsy, there are no shows saved to the list, so return an empty array
+        const shows = list ? Object.values(data[list]) : [];
+        savedShowsTemp[list] = shows;
+      }
+
+      // Update context state with data retrieved from firebase
+      setSavedShows(savedShowsTemp);
+    });
+  }, []);
 
   return (
     <div>
-      <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-        <OuterWrapper>
-          <Header />
-          <SearchResult />
-        </OuterWrapper>
-      </ShowsDataContext.Provider>
+      <SavedShowsContext.Provider value={[savedShows, setSavedShows]}>
+        <ShowsDataContext.Provider value={[showsData, setShowsData]}>
+          <OuterWrapper>
+            <Header />
+            <SearchResult />
+          </OuterWrapper>
+        </ShowsDataContext.Provider>
+      </SavedShowsContext.Provider>
     </div>
   );
 }

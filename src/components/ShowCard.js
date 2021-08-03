@@ -2,14 +2,16 @@ import { useState, useContext } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
 import { black, black1, black2, cyan1, cyan2, grey, white } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import styled from "styled-components";
-import { IconBtn } from "./Buttons";
+import ListOptions from "./ListOptions";
+import {IconBtn} from "./Buttons";
 
 const ShowCard = (props) => {
   const showObj = props.showObj;
-  const { id, image, language, name, summary, genres } = showObj.show;
+  const { id, image, language, name, summary } = showObj.show;
+  const [listMenuOpen, setListMenuOpen] = useState(false);
 
   const [formattedSummary, setFormattedSummary] = useState(null);
 
@@ -58,6 +60,10 @@ const ShowCard = (props) => {
   const finalSummary = formatSummary(summary);
   // const finalGenres = changeGenres(genres);
 
+  const toggleListMenu = () => {
+    setListMenuOpen(listMenuOpen?false:true);
+  }
+
   return (
     <Card key={id}>
       {image ? (
@@ -74,6 +80,13 @@ const ShowCard = (props) => {
       <Genres>{genres}</Genres>
       <Score>{score}%</Score>
       <Title>{name}</Title>
+      <Button onClick={toggleListMenu}>
+        <Icon icon={listMenuOpen?faMinus:faPlus} />
+        <ListOptions isOpen={listMenuOpen}/>
+      </Button>
+      <Name>{name}</Name>
+      <p>{score}%</p>
+      <p>{language}</p>
       <Summary>{formattedSummary ? formattedSummary : finalSummary}</Summary>
       <Load onClick={() => handleLoadMore(summary)}>Load More</Load>
       <Language>{language}</Language>
