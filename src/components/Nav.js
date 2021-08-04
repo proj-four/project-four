@@ -5,17 +5,16 @@ import PrimaryBtn from "./Buttons";
 import CreateList from "./CreateList";
 
 const Nav = () => {
-  const [displayCreateList, setDisplayCreateList] = useState(false);
-
-  const handleClick = () => {
-    setDisplayCreateList(!displayCreateList);
-  };
+  // const handleClick = () => {
+  //   setDisplayCreateList(!displayCreateList);
+  // };
 
   return (
     <NavWrapper>
       <Logo />
-      {displayCreateList && <CreateList />}
-      <PrimaryBtn onClick={handleClick}>New list</PrimaryBtn>
+      <div>
+        <CreateList />
+      </div>
     </NavWrapper>
   );
 };
