@@ -20,9 +20,11 @@ const ListOption = (props) => {
     const shows = savedShows[list];
 
     // Returns a non-empty array if this show was selected by the user to be included on the list
-    const match = shows.find((s) => {
-      return s.show && show.id === s.show.id;
-    });
+    const match =
+      shows &&
+      shows.find((s) => {
+        return s && show.id === s.show.id;
+      });
 
     // Update the state to track whether a given show is on the list or not
     if (match && match.length !== 0) {
