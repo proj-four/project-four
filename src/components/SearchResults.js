@@ -24,7 +24,7 @@ export default SearchResult;
 
 const Container = styled.ul`
     list-style: none;
-    display: inline-block;
+    display: flex;
     overflow-x: auto;
     max-width: 100vw;
     padding: 20px 0;   
