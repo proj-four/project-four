@@ -11,7 +11,7 @@ const SearchResult = () => {
     <div>
       <Container>
         {showsData.map((showObj) => (
-          <ShowCard key={showObj.show.id} showObj={showObj} />
+          <ShowCard key={showObj.show.id} showObj={showObj} favorite={false} />
         ))}
       </Container>
     </div>
@@ -21,19 +21,10 @@ const SearchResult = () => {
 export default SearchResult;
 
 const Container = styled.ul`
-<<<<<<< HEAD
-    list-style: none;
-    display: flex;
-    overflow-x: auto;
-    max-width: 100vw;
-    padding: 20px 0;   
-    background-color: ${black2};
-`;
-=======
   list-style: none;
   display: flex;
-  flex-direction: row;
+  overflow-x: auto;
+  max-width: 100vw;
   padding: 20px 0;
   background-color: ${black2};
 `;
->>>>>>> integration

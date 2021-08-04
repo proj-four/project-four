@@ -22,10 +22,11 @@ import ListOptions from "./ListOptions";
 import { IconBtn } from "./Buttons";
 import ClickAwayListener from "./ClickAwayListener";
 import firebase from "../firebase";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ShowCard = (props) => {
   // TODO: Need to get list name as prop from when this card is shown in a list
-  const { showObj, list } = props;
+  const { showObj, list, favorite } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
   // Tracks whether the list dropdown is shown or not to the user
@@ -114,6 +115,11 @@ const ShowCard = (props) => {
     setListMenuOpen(false);
   };
 
+  const removeShowFromList = () => {
+    console.log("Removing show: " + props.showId);
+    // add remove here from firebase
+  };
+
   return (
     <Card key={id}>
       {image ? (
@@ -122,16 +128,26 @@ const ShowCard = (props) => {
         <Image src={noImageFound} alt="No image found" />
       )}
 
+      {favorite && (
+        <RemoveShowStyle onClick={removeShowFromList}>
+          <Icon icon={faTimes} />
+        </RemoveShowStyle>
+      )}
+
       <ButtonWrapper>
         {/* Like button */}
-        <Button name="like" onClick={handleLikeClick}>
-          <Icon icon={faThumbsUp} />
-        </Button>
+        {favorite && (
+          <Button name="like" onClick={handleLikeClick}>
+            <Icon icon={faThumbsUp} />
+          </Button>
+        )}
 
         {/* Dislike button */}
-        <Button name="dislike" onClick={handleDislikeClick}>
-          <Icon icon={faThumbsDown} />
-        </Button>
+        {favorite && (
+          <Button name="dislike" onClick={handleDislikeClick}>
+            <Icon icon={faThumbsDown} />
+          </Button>
+        )}
 
         {/* List options dropdown */}
         <ClickAwayListener clickAwayCallBack={closeListMenu}>
@@ -236,4 +252,17 @@ const ButtonWrapper = styled.div`
   justify-items: start;
   align-items: center;
   grid-column-gap: 5px;
+`;
+
+const RemoveShowStyle = styled(IconBtn)`
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  right: 8px;
+  border-radius: 100%;
+  color: ${cyan1};
+  padding: 5px 8px;
+  font-size: 20px;
+  border: 2px solid ${cyan1};
+  margin-right: 5px;
 `;
