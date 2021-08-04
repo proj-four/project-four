@@ -99,7 +99,6 @@ const ShowCard = (props) => {
       <Language>{language}</Language>
       <Summary>{formattedSummary ? formattedSummary : finalSummary}</Summary>
       <Load onClick={() => handleLoadMore(summary)}>Load More</Load>
-      <Language>{language}</Language>
     </Card>
   );
 };
