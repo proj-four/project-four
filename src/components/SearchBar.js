@@ -80,28 +80,30 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-const padding = "18.5px 14px";
-const margin = "20.5px 16px";
+const spacing = "18.5px 14px";
 
 const SearchField = styled.div`
   position: relative;
+  margin: 5px;
 `;
 
 const SearchInput = styled.input`
-  padding: ${padding};
-  border: 1px solid ${grey};
+  padding: ${spacing};
+  border: 1px solid ${black};
+  margin: 1px;
   border-radius: 5px;
-  margin: 5px;
   width: 100%;
+  background-color: ${black};
+  color: ${white};
 
   &:hover {
-    margin: 4px;
-    border: 2px solid ${black};
+    margin: 0px;
+    border: 2px solid ${cyan2};
   }
 
   &:active,
   &:focus {
-    margin: 4px;
+    margin: 0px;
     border: 2px solid ${cyan2};
     outline: none;
     border-radius: 5px;
@@ -112,10 +114,11 @@ const SearchLabel = styled.label`
   position: absolute;
   top: 0;
   left: 0;
-  margin: ${margin};
+  margin: ${spacing};
   padding: 3px 5px;
   transition: 0.3s all ease-in-out;
-  background-color: ${white};
+  background-color: ${black};
+  color: ${white};
   pointer-events: none;
   border-radius: 5px;
 
