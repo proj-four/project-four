@@ -93,10 +93,13 @@ const ShowCard = (props) => {
       )}
 
       <ButtonWrapper>
-        <Button>
+        {/* Like button */}
+        <Button name="like">
           <Icon icon={faThumbsUp} />
         </Button>
-        <Button>
+
+        {/* Dislike button */}
+        <Button name="dislike">
           <Icon icon={faThumbsDown} />
         </Button>
 
