@@ -85,6 +85,7 @@ const ShowCard = (props) => {
   };
 
   const updateVotes = (voteType) => {
+    //TODO: remove this manual connection to list variable and connect to actual list
     const list = "draaaaama";
 
     const dbRef = firebase.database().ref(`${list}`);
