@@ -92,7 +92,9 @@ const ShowCard = (props) => {
             <Button onClick={toggleListMenu}>
               <Icon icon={listMenuOpen ? faMinus : faPlus} />
             </Button>
-            {listMenuOpen && <ListOptions isOpen={listMenuOpen} />}
+            {listMenuOpen && (
+              <ListOptions isOpen={listMenuOpen} showObj={showObj} />
+            )}
           </ShowListsWrapper>
         </ClickAwayListener>
       </ButtonWrapper>
