@@ -20,6 +20,7 @@ import ShowsDataContext from "../contexts/ShowsDataContext";
 import styled from "styled-components";
 import ListOptions from "./ListOptions";
 import { IconBtn } from "./Buttons";
+import ClickAwayListener from "./ClickAwayListener";
 
 const ShowCard = (props) => {
   const showObj = props.showObj;
@@ -57,23 +58,16 @@ const ShowCard = (props) => {
     return finalSummary;
   };
 
-  // const finalGenre = genres.map((genre) => {
-  //   let genre = null;
-
-  //   if (genre === null || genre === undefined) {
-  //     genre = "";
-  //   } else {
-  //     genre = genre;
-  //   }
-  //   return genre;
-  // })
-
   const score = Math.floor(showObj.score * 100);
   const finalSummary = formatSummary(summary);
   // const finalGenres = changeGenres(genres);
 
   const toggleListMenu = () => {
-    setListMenuOpen(listMenuOpen ? false : true);
+    setListMenuOpen(!listMenuOpen);
+  };
+
+  const closeListMenu = () => {
+    setListMenuOpen(false);
   };
 
   return (
@@ -83,20 +77,30 @@ const ShowCard = (props) => {
       ) : (
         <Image src={noImageFound} alt="No image found" />
       )}
-      <Button>
-        <Icon icon={faThumbsUp} />
-      </Button>
-      <Button>
-        <Icon icon={faThumbsDown} />
-      </Button>
 
-      <Button onClick={toggleListMenu}>
-        <Icon icon={listMenuOpen ? faMinus : faPlus} />
-        <ListOptions isOpen={listMenuOpen} />
-      </Button>
+      <ButtonWrapper>
+        <Button>
+          <Icon icon={faThumbsUp} />
+        </Button>
+        <Button>
+          <Icon icon={faThumbsDown} />
+        </Button>
+
+        {/* List options dropdown */}
+        <ClickAwayListener clickAwayCallBack={closeListMenu}>
+          <ShowListsWrapper>
+            <Button onClick={toggleListMenu}>
+              <Icon icon={listMenuOpen ? faMinus : faPlus} />
+            </Button>
+            {listMenuOpen && <ListOptions isOpen={listMenuOpen} />}
+          </ShowListsWrapper>
+        </ClickAwayListener>
+      </ButtonWrapper>
+
       <Title>{name}</Title>
       <Score>{score}%</Score>
       <Language>{language}</Language>
+      <Genres>{genres}</Genres>
       <Summary>{formattedSummary ? formattedSummary : finalSummary}</Summary>
       <Load onClick={() => handleLoadMore(summary)}>Load More</Load>
     </Card>
@@ -163,4 +167,16 @@ const Score = styled.p`
 const Language = styled.p`
   color: ${cyan2};
   margin: 0;
+`;
+
+const ShowListsWrapper = styled.div`
+  position: relative;
+`;
+
+const ButtonWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 35px) auto;
+  justify-items: start;
+  align-items: center;
+  grid-column-gap: 5px;
 `;

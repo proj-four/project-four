@@ -8,7 +8,8 @@ const ListOptionsWrapper = styled.div`
   background-color: #0d0d0d;
   color: white;
   z-index: 10;
-  top: calc(100% + 10px);
+  top: -245px;
+  right: -97px;
   margin-left: -10px;
   border-radius: 10px;
   overflow: hidden;
@@ -25,8 +26,11 @@ const ListOptionWrapper = styled.button`
   font-size: 16px;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
   }
 `;
 
@@ -37,14 +41,14 @@ const ListOptions = (props) => {
   useEffect(() => {
     const tempLists = Object.keys(savedShows);
 
-    console.log(tempLists);
     setLists(tempLists);
   }, [savedShows]);
 
   //   const lists = ["Favorites", "Watch Later"];
 
   return (
-    <ListOptionsWrapper style={{ display: props.isOpen ? "block" : "none" }}>
+    // <ListOptionsWrapper style={{ display: props.isOpen ? "block" : "none" }}>
+    <ListOptionsWrapper>
       {lists.map((list, index) => {
         return <ListOption key={index} name={list} />;
       })}

@@ -17,8 +17,6 @@ const CreateList = (props) => {
   const [listName, setListName] = useState("");
   const [createList, setCreateList] = useState(false);
 
-  console.log(props);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -62,7 +60,7 @@ const CreateList = (props) => {
             // onClick={() => setCreateList(true)}
             onChange={(e) => setListName(e.target.value)}
           />
-          <ListLabel for="listName" input={listName}>
+          <ListLabel htmlFor="listName" input={listName}>
             Enter list name
           </ListLabel>
           <BtnContainer>
