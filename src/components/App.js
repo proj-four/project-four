@@ -6,6 +6,7 @@ import SavedShowsContext from "../contexts/SavedShowsContext";
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
+import ShowList from "./ShowList";
 
 function App() {
   // Saves user's search results
@@ -42,6 +43,7 @@ function App() {
           <OuterWrapper>
             <Header />
             <SearchResult />
+            <ShowList/>
           </OuterWrapper>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>

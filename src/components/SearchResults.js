@@ -24,8 +24,9 @@ export default SearchResult;
 
 const Container = styled.ul`
     list-style: none;
-    display: flex;
-    flex-direction:row;
-    padding: 20px 0;
+    display: inline-block;
+    overflow-x: auto;
+    max-width: 100vw;
+    padding: 20px 0;   
     background-color: ${black2};
 `;
