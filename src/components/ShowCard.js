@@ -147,7 +147,9 @@ const Load = styled.button`
 const Image = styled.img`
   width: 210px;
   height: 295px;
-  position: relative;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 5px;
 `;
 
 const Genres = styled.p`
