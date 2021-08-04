@@ -4,25 +4,24 @@ import ShowCard from "./ShowCard";
 import styled from "styled-components";
 import { black, black2, cyan2, grey, white } from "../variables/colors";
 
-
 const SearchResult = () => {
-    const [showsData, setShowsData] = useContext(ShowsDataContext);
+  const [showsData, setShowsData] = useContext(ShowsDataContext);
 
-    return (
+  return (
     <div>
-    <Container>
+      <Container>
         {showsData.map((showObj) => (
-        <ShowCard key={showObj.show.id} showObj={showObj} />
+          <ShowCard key={showObj.show.id} showObj={showObj} />
         ))}
-    </Container>
+      </Container>
     </div>
-    );
+  );
 };
 
 export default SearchResult;
 
-
 const Container = styled.ul`
+<<<<<<< HEAD
     list-style: none;
     display: flex;
     overflow-x: auto;
@@ -30,3 +29,11 @@ const Container = styled.ul`
     padding: 20px 0;   
     background-color: ${black2};
 `;
+=======
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0;
+  background-color: ${black2};
+`;
+>>>>>>> integration
