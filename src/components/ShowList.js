@@ -13,8 +13,9 @@ const ShowList = () => {
     <div>
       {Object.entries(savedShows).map((list, index) => {
         return (
-          <Container key={`savedShowList-${index}`}>
+            <div>
             <ListTitle>{list[0]}</ListTitle>
+          <Container key={`savedShowList-${index}`}>
             {list[1].map((favoritedShow, index) => {
               console.log(favoritedShow.show);
               return (
@@ -26,6 +27,7 @@ const ShowList = () => {
               );
             })}
           </Container>
+          </div>
         );
       })}
     </div>
@@ -41,12 +43,17 @@ const Container = styled.ul`
   max-width: 100vw;
   padding: 20px 0;
   background-color: ${black2};
+  padding: 10px 30px;
+
 `;
 
 const ListTitle = styled.h2`
   margin-bottom: 2rem;
   font-size: 3rem;
   color: ${white};
+  background-color: ${black2};
+  padding: 0 30px;
+  margin: 0;
 `;
 
-const Icon = styled(FontAwesomeIcon)``;
+

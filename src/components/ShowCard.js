@@ -181,6 +181,7 @@ const ShowCard = (props) => {
 export default ShowCard;
 
 const Card = styled.li`
+  width: 220px;
   margin-right: 10px;
   position: relative;
 `;
@@ -258,7 +259,7 @@ const RemoveShowStyle = styled(IconBtn)`
   position: absolute;
   z-index: 10;
   top: 8px;
-  right: 8px;
+  right: 20px;
   border-radius: 100%;
   color: ${cyan1};
   padding: 5px 8px;
