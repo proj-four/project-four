@@ -112,6 +112,8 @@ export default ShowCard;
 const Card = styled.li`
   margin-right: 10px;
   position: relative;
+  width: 210px;
+  /* max-width: 290px; */
 `;
 
 const Button = styled(IconBtn)`

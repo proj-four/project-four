@@ -6,6 +6,8 @@ import SavedShowsContext from "../contexts/SavedShowsContext";
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
+import SavedLists from "./SavedLists";
+import SavedListsContext from "../contexts/SavedListsContext";
 
 function App() {
   // Saves user's search results
@@ -13,6 +15,7 @@ function App() {
 
   // Saves data retrieved from firebase
   const [savedShows, setSavedShows] = useState([]);
+  const [savedLists, setSavedLists] = useState([]);
 
   useEffect(() => {
     // Establish connection to firebase
@@ -39,10 +42,13 @@ function App() {
     <div>
       <SavedShowsContext.Provider value={[savedShows, setSavedShows]}>
         <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-          <OuterWrapper>
-            <Header />
-            <SearchResult />
-          </OuterWrapper>
+          <SavedListsContext.Provider value={[savedLists, setSavedLists]}>
+            <OuterWrapper>
+              <Header />
+              <SearchResult />
+              <SavedLists/>
+            </OuterWrapper>
+          </SavedListsContext.Provider>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>
     </div>
