@@ -8,21 +8,28 @@ const ShowList = () => {
   const [savedShows, setSavedShows] = useContext(SavedShowsContext);
   console.log(savedShows);
   return (
-  <div>
-    {
-    for (const favourite in savedShows) {
-        <div>
+          <div>
             {
-                favourite.map((listItem, index) => {
-                    <p key={index}>
-                        liteItem.show.name
-                    </p>
+                Object.entries(savedShows).map((list, index) => {
+                    return(
+                        <Container key={`savedShowList-${index}`}>
+                            <p>{list[0]}</p>
+                            {
+                                    list[1].map((favoritedShow, index) => {
+                                        console.log(favoritedShow.show)
+                                        return(
+                                            <ShowCard 
+                                                key={`favoritedShow-${index}`}
+                                                showObj={favoritedShow}
+                                            />      
+                                        )
+                                    })
+                                }
+                        </Container>
+                    )
                 })
-            }
+            }     
         </div>
-    }
-}
-  </div>
     );
 }
 
