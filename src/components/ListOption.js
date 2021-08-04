@@ -60,7 +60,7 @@ const ListOption = (props) => {
     // Add to firebase if show was not previously selected
     else {
       const dbRef = firebase.database().ref(`/${list}`);
-      dbRef.push(showObj);
+      dbRef.push({ ...showObj, votes: 0 });
     }
   };
 

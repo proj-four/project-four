@@ -21,9 +21,11 @@ import styled from "styled-components";
 import ListOptions from "./ListOptions";
 import { IconBtn } from "./Buttons";
 import ClickAwayListener from "./ClickAwayListener";
+import firebase from "../firebase";
 
 const ShowCard = (props) => {
-  const showObj = props.showObj;
+  // TODO: Need to get list name as prop from when this card is shown in a list
+  const { showObj, list } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
   // Tracks whether the list dropdown is shown or not to the user
@@ -73,6 +75,33 @@ const ShowCard = (props) => {
   };
 
   const score = Math.floor(showObj.score * 100);
+
+  const handleLikeClick = () => {
+    updateVotes("like");
+  };
+
+  const handleDislikeClick = () => {
+    updateVotes("dislike");
+  };
+
+  const updateVotes = (voteType) => {
+    const list = "draaaaama";
+
+    const dbRef = firebase.database().ref(`${list}`);
+    dbRef.once("value", (result) => {
+      const data = result.val();
+
+      for (const key in data) {
+        if (data[key].show.id === id) {
+          voteType === "like" ? data[key].votes++ : data[key].votes--;
+          break;
+        }
+      }
+
+      dbRef.set(data);
+    });
+  };
+
   // const finalSummary = formatSummary(summary);
   // const finalGenres = changeGenres(genres);
 
@@ -94,12 +123,12 @@ const ShowCard = (props) => {
 
       <ButtonWrapper>
         {/* Like button */}
-        <Button name="like">
+        <Button name="like" onClick={handleLikeClick}>
           <Icon icon={faThumbsUp} />
         </Button>
 
         {/* Dislike button */}
-        <Button name="dislike">
+        <Button name="dislike" onClick={handleDislikeClick}>
           <Icon icon={faThumbsDown} />
         </Button>
 
