@@ -34,7 +34,7 @@ const ClickAwayListener = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeydownOutside);
     };
-  }, []);
+  }, [clickAwayCallBack]);
 
   return (
     // ref attribute assigns the DOM node of this div and sets it as the ref.current property in the useRef variable provided

@@ -3,14 +3,14 @@ import styled, { css } from "styled-components/macro";
 import axios from "axios";
 import { baseUrl, apiKey } from "../variables/api";
 import ShowsDataContext from "../contexts/ShowsDataContext";
-import { black, black2, cyan2, grey, white } from "../variables/colors";
+import { black, black2, cyan2, white } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { IconBtn } from "./Buttons";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [showsData, setShowsData] = useContext(ShowsDataContext);
+  const [, setShowsData] = useContext(ShowsDataContext);
 
   const handleChange = (e) => {
     const query = e.target.value;

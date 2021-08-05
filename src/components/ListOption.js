@@ -13,7 +13,7 @@ const ListOption = (props) => {
   const [isSelected, setIsSelect] = useState(false);
 
   // Global context which tracks all the lists and shows
-  const [savedShows, setSavedShows] = useContext(SavedShowsContext);
+  const [savedShows] = useContext(SavedShowsContext);
 
   useEffect(() => {
     // List of shows extracted from the global context variable
@@ -32,7 +32,7 @@ const ListOption = (props) => {
     } else {
       setIsSelect(false);
     }
-  }, [savedShows]);
+  }, [savedShows, list, show.id]);
 
   const handleClick = () => {
     // Remove from firebase if show was previously selected

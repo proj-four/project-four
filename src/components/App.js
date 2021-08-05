@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import firebase from "../firebase";
 import ShowsDataContext from "../contexts/ShowsDataContext";
 import SavedShowsContext from "../contexts/SavedShowsContext";
-
+import Footer from "./Footer";
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResults from "./SearchResults";
 import ShowList from "./ShowList";
-
 
 function App() {
   // Saves user's search results
@@ -60,6 +59,7 @@ function App() {
             <Header />
             <SearchResults />
             <ShowList />
+            <Footer />
           </OuterWrapper>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>

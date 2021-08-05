@@ -5,7 +5,7 @@ import ShowCard from "./ShowCard";
 import Title from "./Title.styled";
 
 const SearchResults = () => {
-  const [showsData, setShowsData] = useContext(ShowsDataContext);
+  const [showsData] = useContext(ShowsDataContext);
 
   return (
     <div>
