@@ -6,6 +6,8 @@ import ShowCard from "./ShowCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { IconBtn } from "./Buttons";
+import Container from "./Container.styled";
+import Title from "./Title.styled";
 
 const ShowList = () => {
   const [savedShows, setSavedShows] = useContext(SavedShowsContext);
@@ -13,20 +15,20 @@ const ShowList = () => {
     <div>
       {Object.entries(savedShows).map((list, index) => {
         return (
-            <div>
-            <ListTitle>{list[0]}</ListTitle>
-          <Container key={`savedShowList-${index}`}>
-            {list[1].map((favoritedShow, index) => {
-              console.log(favoritedShow.show);
-              return (
-                <ShowCard
-                  key={`favoritedShow-${index}`}
-                  showObj={favoritedShow}
-                  favorite={true}
-                />
-              );
-            })}
-          </Container>
+          <div key={`savedShowContainer-${index}`}>
+            <Title>{list[0]}</Title>
+            <Container key={`savedShowList-${index}`}>
+              {list[1].map((favoritedShow, index) => {
+                return (
+                  <ShowCard
+                    key={`favoritedShow-${index}`}
+                    showObj={favoritedShow}
+                    favorite={true}
+                    list={list[0]}
+                  />
+                );
+              })}
+            </Container>
           </div>
         );
       })}
@@ -35,25 +37,3 @@ const ShowList = () => {
 };
 
 export default ShowList;
-
-const Container = styled.ul`
-  list-style: none;
-  display: flex;
-  overflow-x: auto;
-  max-width: 100vw;
-  padding: 20px 0;
-  background-color: ${black2};
-  padding: 10px 30px;
-
-`;
-
-const ListTitle = styled.h2`
-  margin-bottom: 2rem;
-  font-size: 3rem;
-  color: ${white};
-  background-color: ${black2};
-  padding: 0 30px;
-  margin: 0;
-`;
-
-
