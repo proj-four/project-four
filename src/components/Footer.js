@@ -16,11 +16,9 @@ const Footer = () => {
         <div className="SocialTray">
         Created at 
         <a href="https://junocollege.com"> Juno College </a>
-        by  <a href="https://www.linkedin.com/in/kaunainkarmali/"><Icon icon={faLinkedin}/></a>
-            Kaunain Karmali
-        <a href="https://www.linkedin.com/in/maokitamura/"><Icon icon={faLinkedin}/></a> Mao Kitamura
-        and <a href="https://www.linkedin.com/in/abdulkadir-musse/"> <Icon icon={faLinkedin}/></a> 
-        Abdulkadir Musse
+        by Kaunain Karmali <a href="https://www.linkedin.com/in/kaunainkarmali/"><Icon icon={faLinkedin}/></a> Mao Kitamura 
+        <a href="https://www.linkedin.com/in/maokitamura/"> <Icon icon={faLinkedin}/></a> and Abdulkadir Musse 
+        <a href="https://www.linkedin.com/in/abdulkadir-musse/"> <Icon icon={faLinkedin}/></a> 
         </div>
     </FooterWrapper>
     );
@@ -38,6 +36,7 @@ const FooterWrapper = styled.footer`
     align-items: center;
     background-color: ${grey};
     color:${white}
+    font-weight: 700;
 
     a {
         &:hover,
