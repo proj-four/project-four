@@ -8,6 +8,7 @@ import {
   cyan2,
   grey,
   white,
+  red,
 } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,15 +18,14 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import ShowsDataContext from "../contexts/ShowsDataContext";
-import styled from "styled-components";
+import styled, { css } from "styled-components/macro";
 import ListOptions from "./ListOptions";
-import { IconBtn } from "./Buttons";
+import { SecondaryBtn, IconBtn } from "./Buttons";
 import ClickAwayListener from "./ClickAwayListener";
 import firebase from "../firebase";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ShowCard = (props) => {
-  // TODO: Need to get list name as prop from when this card is shown in a list
   const { showObj, list, favorite } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
@@ -39,7 +39,7 @@ const ShowCard = (props) => {
   const [expand, setExpand] = useState(false);
 
   // Tracks the maximum number of characters to show in the summary
-  const maxSummaryLength = 50;
+  const maxSummaryLength = 75;
 
   useEffect(() => {
     // If user selects show entire show's summary, expand it to full length, otherwise truncate it
@@ -138,65 +138,82 @@ const ShowCard = (props) => {
 
   return (
     <Card key={id}>
-      {/* Render the default image if there is no image url */}
-      {image && image.medium ? (
-        <Image src={image.medium} alt={`Poster of ${name}`} />
-      ) : (
-        <Image src={noImageFound} alt="No image found" />
-      )}
+      <CardHeader>
+        {/* Render the default image if there is no image url */}
+        {image && image.medium ? (
+          <Image src={image.medium} alt={`Poster of ${name}`} />
+        ) : (
+          <Image src={noImageFound} alt="No image found" />
+        )}
 
-      {favorite && (
-        <DeleteBtn onClick={removeShowFromList}>
-          <Icon icon={faTimes} />
-        </DeleteBtn>
-      )}
+        {favorite && (
+          <DeleteBtn onClick={removeShowFromList}>
+            <DeleteIcon icon={faTimes} />
+          </DeleteBtn>
+        )}
 
-      <CardContent>
-        <ButtonWrapper>
-          <VoteBtnWrapper>
-            {/* Like button */}
-            {favorite && (
+        {!favorite && <Score>{score}% match</Score>}
+
+        {/* Render a maximum of two genres */}
+        <GenresContainer>
+          {genres &&
+            genres.map(
+              (genre, index) =>
+                index < 2 && (
+                  <Genre key={`${name}ShowGenre-${index}`}>{genre}</Genre>
+                )
+            )}
+        </GenresContainer>
+      </CardHeader>
+
+      <CardContent expand={expand}>
+        <TitleWrapper>
+          <Title>{name}</Title>
+
+          {/* Show the vote buttons when a show is on a list, otherwise render the dropdown to allow the user to select which list they want to add the show to */}
+          {favorite ? (
+            <VoteBtnWrapper>
+              {/* Like button */}
+
               <Button name="like" onClick={handleLikeClick}>
                 <Icon icon={faThumbsUp} />
               </Button>
-            )}
 
-            {/* Dislike button */}
-            {favorite && (
+              {/* Dislike button */}
+
               <Button name="dislike" onClick={handleDislikeClick}>
                 <Icon icon={faThumbsDown} />
               </Button>
-            )}
 
-            {/* TODO: Current vote count */}
-          </VoteBtnWrapper>
+              {/* TODO: Current vote count */}
+            </VoteBtnWrapper>
+          ) : (
+            <ClickAwayListener clickAwayCallBack={closeListMenu}>
+              {/* List options dropdown */}
+              <ShowListsWrapper>
+                <Button onClick={toggleListMenu}>
+                  <Icon icon={listMenuOpen ? faMinus : faPlus} />
+                </Button>
+                {listMenuOpen && (
+                  <ListOptions isOpen={listMenuOpen} showObj={showObj} />
+                )}
+              </ShowListsWrapper>
+            </ClickAwayListener>
+          )}
+        </TitleWrapper>
 
-          {/* List options dropdown */}
-          <ClickAwayListener clickAwayCallBack={closeListMenu}>
-            <ShowListsWrapper>
-              <Button onClick={toggleListMenu}>
-                <Icon icon={listMenuOpen ? faMinus : faPlus} />
-              </Button>
-              {listMenuOpen && (
-                <ListOptions isOpen={listMenuOpen} showObj={showObj} />
-              )}
-            </ShowListsWrapper>
-          </ClickAwayListener>
-        </ButtonWrapper>
-
-        <Title>{name}</Title>
-        <Score>{score}%</Score>
+        {/* <Title>{name}</Title> */}
         <Language>{language}</Language>
-        <Genres>{genres}</Genres>
-        <Summary>{formattedSummary}</Summary>
 
-        {/* Only show expand and hide toggle if the summary is long */}
-        {summary && summary.length > maxSummaryLength && (
-          <Load onClick={() => setExpand(!expand)}>
-            {expand ? "Hide" : "Expand"}
-          </Load>
-        )}
+        <Summary>{formattedSummary}</Summary>
       </CardContent>
+
+      {/* Only show expand and hide toggle if the summary is long */}
+      {summary && summary.length > maxSummaryLength && (
+        <ExpandBtn onClick={() => setExpand(!expand)}>
+          {expand ? "Hide" : "Expand"}
+        </ExpandBtn>
+      )}
     </Card>
   );
 };
@@ -208,17 +225,32 @@ export default ShowCard;
 const Card = styled.li`
   width: 220px;
   margin-right: 10px;
-  position: relative;
   background-color: ${black1};
   border-radius: 5px;
+  position: relative;
+`;
+
+const CardHeader = styled.div`
+  position: relative;
 `;
 
 const CardContent = styled.div`
   padding: 10px;
+  position: relative;
+  height: 200px;
+
+  ${({ expand }) => {
+    return (
+      expand &&
+      css`
+        height: auto;
+      `
+    );
+  }}
 `;
 
 const Image = styled.img`
-  width: 210px;
+  width: 220px;
   height: 295px;
   object-fit: cover;
   object-position: center center;
@@ -226,18 +258,46 @@ const Image = styled.img`
   border-top-right-radius: 5px;
 `;
 
-// Button styles
+// Genres
 
-const ButtonWrapper = styled.div`
+const GenresContainer = styled.div`
+  position: absolute;
+  margin: 10px;
+  bottom: 0px;
+  left: 0px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
+
+const Genre = styled.p`
+  padding: 5px;
+  margin: 0px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  color: ${grey};
+  background-color: ${black2};
+  margin-right: 3px;
+`;
+
+// Score
+
+const Score = styled.p`
+  position: absolute;
+  margin: 10px;
+  top: 0px;
+  right: 0px;
+  background-color: ${black2};
+  padding: 5px 8px;
+  font-size: 0.5rem;
+  border-radius: 5px;
+  color: ${grey};
+`;
+
+// Button styles
 
 const VoteBtnWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
+  justify-items: end;
   column-gap: 5px;
 `;
 
@@ -254,16 +314,42 @@ const Button = styled(IconBtn)`
   align-items: center;
 `;
 
+const DeleteIcon = styled(FontAwesomeIcon)`
+  height: 16px;
+  width: 16px !important;
+`;
+
 const DeleteBtn = styled(Button)`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  margin: 10px;
+  top: 0px;
+  right: 0px;
+
+  color: ${white};
+  background-color: ${cyan2};
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: ${red};
+    border-color: ${red};
+  }
 `;
 
 // Card content styles
 
-const Title = styled.p`
+const TitleWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  column-gap: 10px;
+  justify-items: space-between;
+  align-items: start;
+`;
+
+const Title = styled.h3`
   margin: 0;
+  width: 125px;
   font-size: 1.5rem;
   font-weight: bold;
   color: ${white};
@@ -271,40 +357,29 @@ const Title = styled.p`
 
 const Summary = styled.p`
   color: ${grey};
-  font-size: 0.9rem;
+  font-size: 1rem;
+  margin: 5px 0px;
 `;
 
-const Load = styled.button`
-  color: ${grey};
-  background-color: ${black2};
-  border: none;
-  position: relative;
-  top: -10px;
-  right: -100px;
+const ExpandBtn = styled(SecondaryBtn)`
   font-size: 0.8rem;
-`;
-
-const Genres = styled.p`
+  padding: 5px 10px;
+  margin: 10px;
   position: absolute;
-  top: 250px;
-  left: 5px;
-  padding: 3px 7px;
-  color: ${cyan1};
-  background-color: ${black1};
-`;
-
-const Score = styled.p`
-  display: inline-block;
-  color: ${white};
+  bottom: 0px;
+  right: 0px;
 `;
 
 const Language = styled.p`
   color: ${cyan2};
-  margin: 0;
+  font-size: 0.8rem;
+  margin: 0px;
+  margin-bottom: 10px;
 `;
 
 // Dropdown container styles
 
 const ShowListsWrapper = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: flex-end;
 `;

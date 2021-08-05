@@ -5,6 +5,8 @@ export const cyan1 = "rgb(102, 252, 241)";
 export const cyan2 = "rgb(69, 162, 158)";
 export const black = "rgb(0, 0, 0)";
 export const white = "rgb(255, 255, 255)";
+export const red = "rgb(255, 72, 72)";
+export const green = "rgb(157, 218, 198)";
 
 const colors = {
   black1: black1,
@@ -14,6 +16,7 @@ const colors = {
   cyan2: cyan2,
   black: black,
   white: white,
+  red: red,
 };
 
 export default colors;

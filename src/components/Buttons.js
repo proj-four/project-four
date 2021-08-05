@@ -30,6 +30,22 @@ const PrimaryBtn = styled.button`
   }
 `;
 
+export const SecondaryBtn = styled(PrimaryBtn)`
+  background-color: ${black2};
+  color: ${cyan2};
+  border: 2px solid ${cyan2};
+  box-shadow: none;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    color: ${black2};
+    background-color: ${cyan2};
+    outline: none;
+  }
+`;
+
 export const IconBtn = styled.button`
   border: none;
   background: none;
