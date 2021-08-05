@@ -29,6 +29,8 @@ const ShowCard = (props) => {
   const { showObj, list, favorite } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
+  console.log(showObj.votes);
+
   // Tracks whether the list dropdown is shown or not to the user
   const [listMenuOpen, setListMenuOpen] = useState(false);
 
