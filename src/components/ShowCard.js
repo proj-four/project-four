@@ -39,7 +39,7 @@ const ShowCard = (props) => {
   const [expand, setExpand] = useState(false);
 
   // Tracks the maximum number of characters to show in the summary
-  const maxSummaryLength = 75;
+  const maxSummaryLength = 100;
 
   useEffect(() => {
     // If user selects show entire show's summary, expand it to full length, otherwise truncate it
@@ -341,6 +341,20 @@ const DeleteBtn = styled(Button)`
   }
 `;
 
+const ExpandBtn = styled(SecondaryBtn)`
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  display: block;
+  width: 100%;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    box-shadow: none;
+  }
+`;
+
 // Card content styles
 
 const TitleWrapper = styled.div`
@@ -364,18 +378,6 @@ const Summary = styled.p`
   color: ${grey};
   font-size: 1rem;
   margin: 5px 0px;
-`;
-
-const ExpandBtn = styled(SecondaryBtn)`
-  font-size: 0.8rem;
-  padding: 5px 10px;
-  display: block;
-  width: 100%;
-  /* margin: 10px; */
-  /* margin: 10px;
-  position: absolute;
-  bottom: 0px;
-  right: 0px; */
 `;
 
 const Language = styled.p`
