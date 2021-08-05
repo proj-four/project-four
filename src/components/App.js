@@ -15,7 +15,12 @@ function App() {
   // Saves data retrieved from firebase
   const [savedShows, setSavedShows] = useState([]);
 
+  // Tracks when firebase data begins to get pulled
+  const [isFirebaseLoaded, setIsFirebaseLoaded] = useState(false);
+
   useEffect(() => {
+    setIsFirebaseLoaded(false);
+
     // Establish connection to firebase
     const dbRef = firebase.database().ref();
 
@@ -37,6 +42,7 @@ function App() {
 
       // Update context state with data retrieved from firebase
       setSavedShows(savedShowsTemp);
+      setIsFirebaseLoaded(true);
     });
   }, []);
 
@@ -56,9 +62,13 @@ function App() {
       <SavedShowsContext.Provider value={[savedShows, setSavedShows]}>
         <ShowsDataContext.Provider value={[showsData, setShowsData]}>
           <OuterWrapper>
+            {/* Connect this to the loading component */}
+            {!isFirebaseLoaded && <p>Loading</p>}
             <Header />
-            <SearchResults />
-            <ShowList />
+            <main>
+              <SearchResults />
+              <ShowList />
+            </main>
             <Footer />
           </OuterWrapper>
         </ShowsDataContext.Provider>
