@@ -4,6 +4,7 @@ import ShowCard from "./ShowCard";
 import styled from "styled-components";
 import { black, black2, cyan2, grey, white } from "../variables/colors";
 
+// TODO: DELETE component
 const SearchResult = () => {
   const [showsData, setShowsData] = useContext(ShowsDataContext);
 
@@ -23,7 +24,8 @@ export default SearchResult;
 const Container = styled.ul`
   list-style: none;
   display: flex;
-  flex-direction: row;
+  overflow-x: auto;
+  max-width: 100vw;
   padding: 20px 0;
   background-color: ${black2};
 `;
