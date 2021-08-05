@@ -1,15 +1,8 @@
 import { useState } from "react";
 import styled, { css } from "styled-components/macro";
 import firebase from "../firebase";
-import {
-  black,
-  black1,
-  black2,
-  cyan1,
-  cyan2,
-  white,
-} from "../variables/colors";
-import PrimaryBtn, { IconBtn } from "./Buttons";
+import { black, black2, cyan1, cyan2, white } from "../variables/colors";
+import { IconBtn } from "./Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
