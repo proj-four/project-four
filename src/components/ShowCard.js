@@ -1,15 +1,6 @@
 import { useState, useEffect } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
-import {
-  black,
-  black1,
-  black2,
-  cyan1,
-  cyan2,
-  grey,
-  white,
-  red,
-} from "../variables/colors";
+import { black1, black2, cyan2, grey, white, red } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faThumbsUp,
@@ -17,7 +8,6 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import ShowsDataContext from "../contexts/ShowsDataContext";
 import styled, { css } from "styled-components/macro";
 import ListOptions from "./ListOptions";
 import { SecondaryBtn, IconBtn } from "./Buttons";
@@ -28,8 +18,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const ShowCard = (props) => {
   const { showObj, list, favorite } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
-
-  console.log(showObj.votes);
 
   // Tracks whether the list dropdown is shown or not to the user
   const [listMenuOpen, setListMenuOpen] = useState(false);

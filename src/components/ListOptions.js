@@ -6,7 +6,7 @@ import ListOption from "./ListOption";
 const ListOptions = (props) => {
   const { showObj } = props;
 
-  const [savedShows, setSavedShows] = useContext(SavedShowsContext);
+  const [savedShows] = useContext(SavedShowsContext);
   const [lists, setLists] = useState([]);
 
   useEffect(() => {

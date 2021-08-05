@@ -5,7 +5,7 @@ import Title from "./Title.styled";
 import Container from "./Container.styled";
 
 const ShowList = () => {
-  const [savedShows, setSavedShows] = useContext(SavedShowsContext);
+  const [savedShows] = useContext(SavedShowsContext);
 
   return (
     <div>

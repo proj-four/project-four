@@ -13,7 +13,7 @@ const ListOption = (props) => {
   const [isSelected, setIsSelect] = useState(false);
 
   // Global context which tracks all the lists and shows
-  const [savedShows, setSavedShows] = useContext(SavedShowsContext);
+  const [savedShows] = useContext(SavedShowsContext);
 
   useEffect(() => {
     // List of shows extracted from the global context variable
