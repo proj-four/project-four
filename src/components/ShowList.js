@@ -1,11 +1,10 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import SavedShowsContext from "../contexts/SavedShowsContext";
 import styled from "styled-components";
-import { black, black2, cyan1, cyan2, grey, white } from "../variables/colors";
+import { cyan1, black2, white } from "../variables/colors";
 import ShowCard from "./ShowCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { IconBtn } from "./Buttons";
+
+
 
 const ShowList = () => {
   const [savedShows, setSavedShows] = useContext(SavedShowsContext);
@@ -34,6 +33,8 @@ const ShowList = () => {
   );
 };
 
+
+
 export default ShowList;
 
 const Container = styled.ul`
@@ -45,6 +46,14 @@ const Container = styled.ul`
   background-color: ${black2};
   padding: 10px 30px;
 
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 3px;
+    background: ${cyan1};
+    border-radius: 5px;
+  }  
 `;
 
 const ListTitle = styled.h2`

@@ -7,6 +7,7 @@ import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 import ShowList from "./ShowList";
+import Rank from "./Rank";
 
 function App() {
   // Saves user's search results
@@ -44,6 +45,7 @@ function App() {
             <Header />
             <SearchResult />
             <ShowList/>
+            {/* <Rank/> */}
           </OuterWrapper>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>
