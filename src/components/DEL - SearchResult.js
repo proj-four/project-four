@@ -1,31 +1,31 @@
-import { useState, useContext } from "react";
-import ShowsDataContext from "../contexts/ShowsDataContext";
-import ShowCard from "./ShowCard";
-import styled from "styled-components";
-import { black, black2, cyan2, grey, white } from "../variables/colors";
+// import { useState, useContext } from "react";
+// import ShowsDataContext from "../contexts/ShowsDataContext";
+// import ShowCard from "./ShowCard";
+// import styled from "styled-components";
+// import { black, black2, cyan2, grey, white } from "../variables/colors";
 
-// TODO: DELETE component
-const SearchResult = () => {
-  const [showsData, setShowsData] = useContext(ShowsDataContext);
+// // TODO: DELETE component
+// const SearchResult = () => {
+//   const [showsData, setShowsData] = useContext(ShowsDataContext);
 
-  return (
-    <div>
-      <Container>
-        {showsData.map((showObj) => (
-          <ShowCard key={showObj.show.id} showObj={showObj} />
-        ))}
-      </Container>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <Container>
+//         {showsData.map((showObj) => (
+//           <ShowCard key={showObj.show.id} showObj={showObj} />
+//         ))}
+//       </Container>
+//     </div>
+//   );
+// };
 
-export default SearchResult;
+// export default SearchResult;
 
-const Container = styled.ul`
-  list-style: none;
-  display: flex;
-  overflow-x: auto;
-  max-width: 100vw;
-  padding: 20px 0;
-  background-color: ${black2};
-`;
+// const Container = styled.ul`
+//   list-style: none;
+//   display: flex;
+//   overflow-x: auto;
+//   max-width: 100vw;
+//   padding: 20px 0;
+//   background-color: ${black2};
+// `;

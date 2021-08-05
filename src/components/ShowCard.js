@@ -138,77 +138,134 @@ const ShowCard = (props) => {
 
   return (
     <Card key={id}>
-      {image ? (
+      {/* Render the default image if there is no image url */}
+      {image && image.medium ? (
         <Image src={image.medium} alt={`Poster of ${name}`} />
       ) : (
         <Image src={noImageFound} alt="No image found" />
       )}
 
       {favorite && (
-        <RemoveShowStyle onClick={removeShowFromList}>
+        <DeleteBtn onClick={removeShowFromList}>
           <Icon icon={faTimes} />
-        </RemoveShowStyle>
+        </DeleteBtn>
       )}
 
-      <ButtonWrapper>
-        {/* Like button */}
-        {favorite && (
-          <Button name="like" onClick={handleLikeClick}>
-            <Icon icon={faThumbsUp} />
-          </Button>
-        )}
-
-        {/* Dislike button */}
-        {favorite && (
-          <Button name="dislike" onClick={handleDislikeClick}>
-            <Icon icon={faThumbsDown} />
-          </Button>
-        )}
-
-        {/* List options dropdown */}
-        <ClickAwayListener clickAwayCallBack={closeListMenu}>
-          <ShowListsWrapper>
-            <Button onClick={toggleListMenu}>
-              <Icon icon={listMenuOpen ? faMinus : faPlus} />
-            </Button>
-            {listMenuOpen && (
-              <ListOptions isOpen={listMenuOpen} showObj={showObj} />
+      <CardContent>
+        <ButtonWrapper>
+          <VoteBtnWrapper>
+            {/* Like button */}
+            {favorite && (
+              <Button name="like" onClick={handleLikeClick}>
+                <Icon icon={faThumbsUp} />
+              </Button>
             )}
-          </ShowListsWrapper>
-        </ClickAwayListener>
-      </ButtonWrapper>
 
-      <Title>{name}</Title>
-      <Score>{score}%</Score>
-      <Language>{language}</Language>
-      <Genres>{genres}</Genres>
-      <Summary>{formattedSummary}</Summary>
+            {/* Dislike button */}
+            {favorite && (
+              <Button name="dislike" onClick={handleDislikeClick}>
+                <Icon icon={faThumbsDown} />
+              </Button>
+            )}
 
-      {/* Only show expand and hide toggle if the summary is long */}
-      {summary && summary.length > maxSummaryLength && (
-        <Load onClick={() => setExpand(!expand)}>
-          {expand ? "Hide" : "Expand"}
-        </Load>
-      )}
+            {/* TODO: Current vote count */}
+          </VoteBtnWrapper>
+
+          {/* List options dropdown */}
+          <ClickAwayListener clickAwayCallBack={closeListMenu}>
+            <ShowListsWrapper>
+              <Button onClick={toggleListMenu}>
+                <Icon icon={listMenuOpen ? faMinus : faPlus} />
+              </Button>
+              {listMenuOpen && (
+                <ListOptions isOpen={listMenuOpen} showObj={showObj} />
+              )}
+            </ShowListsWrapper>
+          </ClickAwayListener>
+        </ButtonWrapper>
+
+        <Title>{name}</Title>
+        <Score>{score}%</Score>
+        <Language>{language}</Language>
+        <Genres>{genres}</Genres>
+        <Summary>{formattedSummary}</Summary>
+
+        {/* Only show expand and hide toggle if the summary is long */}
+        {summary && summary.length > maxSummaryLength && (
+          <Load onClick={() => setExpand(!expand)}>
+            {expand ? "Hide" : "Expand"}
+          </Load>
+        )}
+      </CardContent>
     </Card>
   );
 };
 
 export default ShowCard;
 
+// Card container
+
 const Card = styled.li`
   width: 220px;
   margin-right: 10px;
   position: relative;
+<<<<<<< HEAD
   width: 210px;
   /* max-width: 290px; */
+=======
+  background-color: ${black1};
+  border-radius: 5px;
+`;
+
+const CardContent = styled.div`
+  padding: 10px;
+`;
+
+const Image = styled.img`
+  width: 210px;
+  height: 295px;
+  object-fit: cover;
+  object-position: center center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+`;
+
+// Button styles
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const VoteBtnWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  column-gap: 5px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  height: 16px;
+  width: 14px;
+>>>>>>> integration
 `;
 
 const Button = styled(IconBtn)`
   border-radius: 50%;
   border: 1px solid ${cyan2};
-  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+const DeleteBtn = styled(Button)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
+// Card content styles
 
 const Title = styled.p`
   margin: 0;
@@ -216,8 +273,6 @@ const Title = styled.p`
   font-weight: bold;
   color: ${white};
 `;
-
-const Icon = styled(FontAwesomeIcon)``;
 
 const Summary = styled.p`
   color: ${grey};
@@ -232,14 +287,6 @@ const Load = styled.button`
   top: -10px;
   right: -100px;
   font-size: 0.8rem;
-`;
-
-const Image = styled.img`
-  width: 210px;
-  height: 295px;
-  object-fit: cover;
-  object-position: center center;
-  border-radius: 5px;
 `;
 
 const Genres = styled.p`
@@ -261,27 +308,8 @@ const Language = styled.p`
   margin: 0;
 `;
 
+// Dropdown container styles
+
 const ShowListsWrapper = styled.div`
   position: relative;
-`;
-
-const ButtonWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 35px) auto;
-  justify-items: start;
-  align-items: center;
-  grid-column-gap: 5px;
-`;
-
-const RemoveShowStyle = styled(IconBtn)`
-  position: absolute;
-  z-index: 10;
-  top: 8px;
-  right: 20px;
-  border-radius: 100%;
-  color: ${cyan1};
-  padding: 5px 8px;
-  font-size: 20px;
-  border: 2px solid ${cyan1};
-  margin-right: 5px;
 `;
