@@ -22,10 +22,11 @@ import ListOptions from "./ListOptions";
 import { IconBtn } from "./Buttons";
 import ClickAwayListener from "./ClickAwayListener";
 import firebase from "../firebase";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ShowCard = (props) => {
   // TODO: Need to get list name as prop from when this card is shown in a list
-  const { showObj, list } = props;
+  const { showObj, list, favorite } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
   // Tracks whether the list dropdown is shown or not to the user
@@ -85,9 +86,6 @@ const ShowCard = (props) => {
   };
 
   const updateVotes = (voteType) => {
-    //TODO: remove this manual connection to list variable and connect to actual list
-    const list = "draaaaama";
-
     const dbRef = firebase.database().ref(`${list}`);
     dbRef.once("value", (result) => {
       const data = result.val();
@@ -114,6 +112,30 @@ const ShowCard = (props) => {
     setListMenuOpen(false);
   };
 
+  const removeShowFromList = () => {
+    // Create connection to the specific list in firebase
+    const dbRef = firebase.database().ref(`/${list}`);
+    dbRef.once("value", (response) => {
+      // Get all the shows in a given list
+      const responseObj = response.val();
+
+      // Loop through the database response to find the key to be removed by matching the show id
+      for (const key in responseObj) {
+        if (responseObj[key].show.id === id) {
+          // Delete the specific key from the database if there are still movies in it
+          delete responseObj[key];
+
+          break;
+        }
+      }
+
+      // Update the database
+      dbRef.set(responseObj);
+    });
+
+    // add remove here from firebase
+  };
+
   return (
     <Card key={id}>
       {image ? (
@@ -122,16 +144,26 @@ const ShowCard = (props) => {
         <Image src={noImageFound} alt="No image found" />
       )}
 
+      {favorite && (
+        <RemoveShowStyle onClick={removeShowFromList}>
+          <Icon icon={faTimes} />
+        </RemoveShowStyle>
+      )}
+
       <ButtonWrapper>
         {/* Like button */}
-        <Button name="like" onClick={handleLikeClick}>
-          <Icon icon={faThumbsUp} />
-        </Button>
+        {favorite && (
+          <Button name="like" onClick={handleLikeClick}>
+            <Icon icon={faThumbsUp} />
+          </Button>
+        )}
 
         {/* Dislike button */}
-        <Button name="dislike" onClick={handleDislikeClick}>
-          <Icon icon={faThumbsDown} />
-        </Button>
+        {favorite && (
+          <Button name="dislike" onClick={handleDislikeClick}>
+            <Icon icon={faThumbsDown} />
+          </Button>
+        )}
 
         {/* List options dropdown */}
         <ClickAwayListener clickAwayCallBack={closeListMenu}>
@@ -153,7 +185,7 @@ const ShowCard = (props) => {
       <Summary>{formattedSummary}</Summary>
 
       {/* Only show expand and hide toggle if the summary is long */}
-      {summary.length > maxSummaryLength && (
+      {summary && summary.length > maxSummaryLength && (
         <Load onClick={() => setExpand(!expand)}>
           {expand ? "Hide" : "Expand"}
         </Load>
@@ -165,6 +197,7 @@ const ShowCard = (props) => {
 export default ShowCard;
 
 const Card = styled.li`
+  width: 220px;
   margin-right: 10px;
   position: relative;
   width: 210px;
@@ -238,4 +271,17 @@ const ButtonWrapper = styled.div`
   justify-items: start;
   align-items: center;
   grid-column-gap: 5px;
+`;
+
+const RemoveShowStyle = styled(IconBtn)`
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  right: 20px;
+  border-radius: 100%;
+  color: ${cyan1};
+  padding: 5px 8px;
+  font-size: 20px;
+  border: 2px solid ${cyan1};
+  margin-right: 5px;
 `;

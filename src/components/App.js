@@ -5,9 +5,9 @@ import SavedShowsContext from "../contexts/SavedShowsContext";
 
 import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
-import SearchResult from "./SearchResult";
-import SavedLists from "./SavedLists";
-import SavedListsContext from "../contexts/SavedListsContext";
+import SearchResults from "./SearchResults";
+import ShowList from "./ShowList";
+
 
 function App() {
   // Saves user's search results
@@ -30,7 +30,11 @@ function App() {
       for (const list in data) {
         // If the list is falsy, there are no shows saved to the list, so return an empty array
         const shows = list ? Object.values(data[list]) : [];
-        savedShowsTemp[list] = shows;
+
+        // Sort the shows in order based on vote count using the compare function
+        const sortedShows = shows.sort(compare);
+
+        savedShowsTemp[list] = sortedShows;
       }
 
       // Update context state with data retrieved from firebase
@@ -38,17 +42,26 @@ function App() {
     });
   }, []);
 
+  // Used with the sort array method to sort the shows in order of vote count
+  const compare = (a, b) => {
+    if (a.votes > b.votes) {
+      return -1;
+    }
+    if (a.votes < b.votes) {
+      return 1;
+    }
+    return 0;
+  };
+
   return (
     <div>
       <SavedShowsContext.Provider value={[savedShows, setSavedShows]}>
         <ShowsDataContext.Provider value={[showsData, setShowsData]}>
-          <SavedListsContext.Provider value={[savedLists, setSavedLists]}>
-            <OuterWrapper>
-              <Header />
-              <SearchResult />
-              <SavedLists/>
-            </OuterWrapper>
-          </SavedListsContext.Provider>
+          <OuterWrapper>
+            <Header />
+            <SearchResults />
+            <ShowList />
+          </OuterWrapper>
         </ShowsDataContext.Provider>
       </SavedShowsContext.Provider>
     </div>
