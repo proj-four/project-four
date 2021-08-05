@@ -40,7 +40,7 @@ const ShowCard = (props) => {
       const finalSummary = formatSummary(summary);
       setFormattedSummary(finalSummary);
     }
-  }, [expand]);
+  }, [expand, summary]);
 
   // Function formats the summary received from the API
   const formatSummary = (summary, maxCharLength = maxSummaryLength) => {

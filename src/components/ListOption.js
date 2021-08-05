@@ -32,7 +32,7 @@ const ListOption = (props) => {
     } else {
       setIsSelect(false);
     }
-  }, [savedShows]);
+  }, [savedShows, list, show.id]);
 
   const handleClick = () => {
     // Remove from firebase if show was previously selected
