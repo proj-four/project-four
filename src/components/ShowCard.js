@@ -207,13 +207,14 @@ const ShowCard = (props) => {
 
         <Summary>{formattedSummary}</Summary>
       </CardContent>
-
-      {/* Only show expand and hide toggle if the summary is long */}
-      {summary && summary.length > maxSummaryLength && (
-        <ExpandBtn onClick={() => setExpand(!expand)}>
-          {expand ? "Hide" : "Expand"}
-        </ExpandBtn>
-      )}
+      <CardFooter>
+        {/* Only show expand and hide toggle if the summary is long */}
+        {summary && summary.length > maxSummaryLength && (
+          <ExpandBtn onClick={() => setExpand(!expand)}>
+            {expand ? "Collapse" : "Expand"}
+          </ExpandBtn>
+        )}
+      </CardFooter>
     </Card>
   );
 };
@@ -247,6 +248,10 @@ const CardContent = styled.div`
       `
     );
   }}
+`;
+
+const CardFooter = styled.div`
+  padding: 10px;
 `;
 
 const Image = styled.img`
@@ -364,10 +369,13 @@ const Summary = styled.p`
 const ExpandBtn = styled(SecondaryBtn)`
   font-size: 0.8rem;
   padding: 5px 10px;
-  margin: 10px;
+  display: block;
+  width: 100%;
+  /* margin: 10px; */
+  /* margin: 10px;
   position: absolute;
   bottom: 0px;
-  right: 0px;
+  right: 0px; */
 `;
 
 const Language = styled.p`
