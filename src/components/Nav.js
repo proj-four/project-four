@@ -1,14 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
-import PrimaryBtn from "./Buttons";
 import CreateList from "./CreateList";
 
 const Nav = () => {
-  // const handleClick = () => {
-  //   setDisplayCreateList(!displayCreateList);
-  // };
-
   return (
     <NavWrapper>
       <Logo />
