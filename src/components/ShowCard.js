@@ -169,7 +169,7 @@ const ShowCard = (props) => {
       <Summary>{formattedSummary}</Summary>
 
       {/* Only show expand and hide toggle if the summary is long */}
-      {summary.length > maxSummaryLength && (
+      {summary && summary.length > maxSummaryLength && (
         <Load onClick={() => setExpand(!expand)}>
           {expand ? "Hide" : "Expand"}
         </Load>
