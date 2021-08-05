@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
 import {
   black,
@@ -21,27 +21,43 @@ import styled from "styled-components";
 import ListOptions from "./ListOptions";
 import { IconBtn } from "./Buttons";
 import ClickAwayListener from "./ClickAwayListener";
+import firebase from "../firebase";
 
 const ShowCard = (props) => {
-  const showObj = props.showObj;
+  // TODO: Need to get list name as prop from when this card is shown in a list
+  const { showObj, list } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
+
+  // Tracks whether the list dropdown is shown or not to the user
   const [listMenuOpen, setListMenuOpen] = useState(false);
 
+  // Tracks the formatted summary / show description
   const [formattedSummary, setFormattedSummary] = useState(null);
 
-  // Triggers a modal to appear on the page with the movie details
-  const handleLoadMore = (summary) => {
-    const finalSummary = formatSummary(summary, summary.length);
+  // Tracks whether the entire show description should be shown to the user or not
+  const [expand, setExpand] = useState(false);
 
-    setFormattedSummary(finalSummary);
-  };
+  // Tracks the maximum number of characters to show in the summary
+  const maxSummaryLength = 50;
 
-  const formatSummary = (summary, maxCharLength = 50) => {
-    let finalSummary = null;
+  useEffect(() => {
+    // If user selects show entire show's summary, expand it to full length, otherwise truncate it
+    if (expand) {
+      const finalSummary = formatSummary(summary, summary.length);
+      setFormattedSummary(finalSummary);
+    } else {
+      const finalSummary = formatSummary(summary);
+      setFormattedSummary(finalSummary);
+    }
+  }, [expand]);
+
+  // Function formats the summary received from the API
+  const formatSummary = (summary, maxCharLength = maxSummaryLength) => {
+    let result = null;
 
     // Check if summary is null or not
     if (summary === null || summary === undefined) {
-      finalSummary = "N/A";
+      result = "N/A";
     } else {
       // Remove HTML tags
       const regex = /(<([^>]+)>)/gi;
@@ -49,17 +65,45 @@ const ShowCard = (props) => {
 
       // Trim the summary
       if (cleanSummary.length > maxCharLength) {
-        finalSummary = cleanSummary.substring(0, maxCharLength) + "...";
+        result = cleanSummary.substring(0, maxCharLength) + "...";
       } else {
-        finalSummary = cleanSummary;
+        result = cleanSummary;
       }
     }
 
-    return finalSummary;
+    return result;
   };
 
   const score = Math.floor(showObj.score * 100);
-  const finalSummary = formatSummary(summary);
+
+  const handleLikeClick = () => {
+    updateVotes("like");
+  };
+
+  const handleDislikeClick = () => {
+    updateVotes("dislike");
+  };
+
+  const updateVotes = (voteType) => {
+    //TODO: remove this manual connection to list variable and connect to actual list
+    const list = "draaaaama";
+
+    const dbRef = firebase.database().ref(`${list}`);
+    dbRef.once("value", (result) => {
+      const data = result.val();
+
+      for (const key in data) {
+        if (data[key].show.id === id) {
+          voteType === "like" ? data[key].votes++ : data[key].votes--;
+          break;
+        }
+      }
+
+      dbRef.set(data);
+    });
+  };
+
+  // const finalSummary = formatSummary(summary);
   // const finalGenres = changeGenres(genres);
 
   const toggleListMenu = () => {
@@ -79,10 +123,13 @@ const ShowCard = (props) => {
       )}
 
       <ButtonWrapper>
-        <Button>
+        {/* Like button */}
+        <Button name="like" onClick={handleLikeClick}>
           <Icon icon={faThumbsUp} />
         </Button>
-        <Button>
+
+        {/* Dislike button */}
+        <Button name="dislike" onClick={handleDislikeClick}>
           <Icon icon={faThumbsDown} />
         </Button>
 
@@ -92,7 +139,9 @@ const ShowCard = (props) => {
             <Button onClick={toggleListMenu}>
               <Icon icon={listMenuOpen ? faMinus : faPlus} />
             </Button>
-            {listMenuOpen && <ListOptions isOpen={listMenuOpen} />}
+            {listMenuOpen && (
+              <ListOptions isOpen={listMenuOpen} showObj={showObj} />
+            )}
           </ShowListsWrapper>
         </ClickAwayListener>
       </ButtonWrapper>
@@ -101,8 +150,14 @@ const ShowCard = (props) => {
       <Score>{score}%</Score>
       <Language>{language}</Language>
       <Genres>{genres}</Genres>
-      <Summary>{formattedSummary ? formattedSummary : finalSummary}</Summary>
-      <Load onClick={() => handleLoadMore(summary)}>Load More</Load>
+      <Summary>{formattedSummary}</Summary>
+
+      {/* Only show expand and hide toggle if the summary is long */}
+      {summary.length > maxSummaryLength && (
+        <Load onClick={() => setExpand(!expand)}>
+          {expand ? "Hide" : "Expand"}
+        </Load>
+      )}
     </Card>
   );
 };
