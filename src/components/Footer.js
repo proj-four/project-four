@@ -1,27 +1,31 @@
 import styled from "styled-components";
-import {
-    white,
-    grey,
-    } from "../variables/colors";
+import { white, grey } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faLinkedin,
-    } from "@fortawesome/free-brands-svg-icons";
-
-
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
-    return (
+  return (
     <FooterWrapper>
-        <div className="SocialTray">
-        Created at 
+      <div className="SocialTray">
+        Created at
         <a href="https://junocollege.com"> Juno College </a>
-        by Kaunain Karmali <a href="https://www.linkedin.com/in/kaunainkarmali/"><Icon icon={faLinkedin}/></a> Mao Kitamura 
-        <a href="https://www.linkedin.com/in/maokitamura/"> <Icon icon={faLinkedin}/></a> and Abdulkadir Musse 
-        <a href="https://www.linkedin.com/in/abdulkadir-musse/"> <Icon icon={faLinkedin}/></a> 
-        </div>
+        by Kaunain Karmali{" "}
+        <a href="https://www.linkedin.com/in/kaunainkarmali/">
+          <Icon icon={faLinkedin} />
+        </a>{" "}
+        Mao Kitamura
+        <a href="https://www.linkedin.com/in/maokitamura/">
+          {" "}
+          <Icon icon={faLinkedin} />
+        </a>{" "}
+        and Abdulkadir Musse
+        <a href="https://www.linkedin.com/in/abdulkadir-musse/">
+          {" "}
+          <Icon icon={faLinkedin} />
+        </a>
+      </div>
     </FooterWrapper>
-    );
+  );
 };
 
 export default Footer;
