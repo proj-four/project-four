@@ -86,9 +86,6 @@ const ShowCard = (props) => {
   };
 
   const updateVotes = (voteType) => {
-    //TODO: remove this manual connection to list variable and connect to actual list
-    const list = "draaaaama";
-
     const dbRef = firebase.database().ref(`${list}`);
     dbRef.once("value", (result) => {
       const data = result.val();
@@ -116,7 +113,26 @@ const ShowCard = (props) => {
   };
 
   const removeShowFromList = () => {
-    console.log("Removing show: " + props.showId);
+    // Create connection to the specific list in firebase
+    const dbRef = firebase.database().ref(`/${list}`);
+    dbRef.once("value", (response) => {
+      // Get all the shows in a given list
+      const responseObj = response.val();
+
+      // Loop through the database response to find the key to be removed by matching the show id
+      for (const key in responseObj) {
+        if (responseObj[key].show.id === id) {
+          // Delete the specific key from the database if there are still movies in it
+          delete responseObj[key];
+
+          break;
+        }
+      }
+
+      // Update the database
+      dbRef.set(responseObj);
+    });
+
     // add remove here from firebase
   };
 
@@ -169,7 +185,7 @@ const ShowCard = (props) => {
       <Summary>{formattedSummary}</Summary>
 
       {/* Only show expand and hide toggle if the summary is long */}
-      {summary.length > maxSummaryLength && (
+      {summary && summary.length > maxSummaryLength && (
         <Load onClick={() => setExpand(!expand)}>
           {expand ? "Hide" : "Expand"}
         </Load>

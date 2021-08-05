@@ -5,27 +5,26 @@ import { cyan1, black2, white } from "../variables/colors";
 import ShowCard from "./ShowCard";
 
 
-
 const ShowList = () => {
   const [savedShows, setSavedShows] = useContext(SavedShowsContext);
   return (
     <div>
       {Object.entries(savedShows).map((list, index) => {
         return (
-            <div>
-            <ListTitle>{list[0]}</ListTitle>
-          <Container key={`savedShowList-${index}`}>
-            {list[1].map((favoritedShow, index) => {
-              console.log(favoritedShow.show);
-              return (
-                <ShowCard
-                  key={`favoritedShow-${index}`}
-                  showObj={favoritedShow}
-                  favorite={true}
-                />
-              );
-            })}
-          </Container>
+          <div key={`savedShowContainer-${index}`}>
+            <Title>{list[0]}</Title>
+            <Container key={`savedShowList-${index}`}>
+              {list[1].map((favoritedShow, index) => {
+                return (
+                  <ShowCard
+                    key={`favoritedShow-${index}`}
+                    showObj={favoritedShow}
+                    favorite={true}
+                    list={list[0]}
+                  />
+                );
+              })}
+            </Container>
           </div>
         );
       })}
@@ -56,7 +55,7 @@ const Container = styled.ul`
   }  
 `;
 
-const ListTitle = styled.h2`
+const Title = styled.h2`
   margin-bottom: 2rem;
   font-size: 3rem;
   color: ${white};
