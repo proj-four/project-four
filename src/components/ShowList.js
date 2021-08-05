@@ -33,11 +33,4 @@ const ShowList = () => {
   );
 };
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 7d2e9d1c8f7f3c13c3578bec802a2d9a162895cc
 export default ShowList;
