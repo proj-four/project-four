@@ -22,6 +22,7 @@ const ShowList = () => {
                     showObj={showObj}
                     favorite={true}
                     list={list[0]}
+                    index={index}
                   />
                 );
               })}
