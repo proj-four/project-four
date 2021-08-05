@@ -8,7 +8,6 @@ import Header from "./Header";
 import SearchResults from "./SearchResults";
 import ShowList from "./ShowList";
 
-
 function App() {
   // Saves user's search results
   const [showsData, setShowsData] = useState([]);

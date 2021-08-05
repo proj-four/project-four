@@ -219,6 +219,8 @@ const Card = styled.li`
   background-color: ${black1};
   border-radius: 5px;
   position: relative;
+  width: 210px;
+  /* max-width: 290px; */
 `;
 
 const CardHeader = styled.div`
