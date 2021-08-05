@@ -1,17 +1,10 @@
 import { useState } from "react";
 import styled, { css } from "styled-components/macro";
 import firebase from "../firebase";
-import {
-  black,
-  black1,
-  black2,
-  cyan1,
-  cyan2,
-  white,
-} from "../variables/colors";
-import PrimaryBtn, { IconBtn } from "./Buttons";
+import { black, black2, cyan1, cyan2, white } from "../variables/colors";
+import { IconBtn } from "./Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const CreateList = (props) => {
   const [listName, setListName] = useState("");
@@ -65,7 +58,7 @@ const CreateList = (props) => {
           </ListLabel>
           <BtnContainer>
             <SearchBtn type="submit" onClick={handleSubmit}>
-              <Icon icon={faSearch} />
+              <Icon icon={faPlus} />
             </SearchBtn>
             <Vertical />
             <ResetBtn type="reset" onClick={handleReset}>
