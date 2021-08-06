@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import noImageFound from "../assets/noImageFound.jpg";
-import { black1, black2, cyan2, grey, white, red } from "../variables/colors";
+import {
+  black1,
+  black2,
+  cyan2,
+  grey,
+  white,
+  red,
+  orange,
+  green,
+} from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faThumbsUp,
@@ -16,7 +25,7 @@ import firebase from "../firebase";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ShowCard = (props) => {
-  const { showObj, list, favorite } = props;
+  const { showObj, list, favorite, index } = props;
   const { id, image, language, name, summary, genres } = showObj.show;
 
   // Tracks whether the list dropdown is shown or not to the user
@@ -91,9 +100,6 @@ const ShowCard = (props) => {
     });
   };
 
-  // const finalSummary = formatSummary(summary);
-  // const finalGenres = changeGenres(genres);
-
   const toggleListMenu = () => {
     setListMenuOpen(!listMenuOpen);
   };
@@ -144,6 +150,8 @@ const ShowCard = (props) => {
 
         {!favorite && <Score>{score}% match</Score>}
 
+        {index < 10 && <TopTen>Top 10</TopTen>}
+
         {/* Render a maximum of two genres */}
         <GenresContainer>
           {genres &&
@@ -158,25 +166,31 @@ const ShowCard = (props) => {
 
       <CardContent expand={expand}>
         <TitleWrapper>
-          <Title>{name}</Title>
+          <div>
+            <Title>{name}</Title>
+            <Language>{language}</Language>
+          </div>
 
           {/* Show the vote buttons when a show is on a list, otherwise render the dropdown to allow the user to select which list they want to add the show to */}
           {favorite ? (
-            <VoteBtnWrapper>
-              {/* Like button */}
+            <div>
+              <VoteBtnWrapper>
+                {/* Like button */}
 
-              <Button name="like" onClick={handleLikeClick}>
-                <Icon icon={faThumbsUp} />
-              </Button>
+                <Button name="like" onClick={handleLikeClick}>
+                  <Icon icon={faThumbsUp} />
+                </Button>
 
-              {/* Dislike button */}
+                {/* Dislike button */}
 
-              <Button name="dislike" onClick={handleDislikeClick}>
-                <Icon icon={faThumbsDown} />
-              </Button>
+                <Button name="dislike" onClick={handleDislikeClick}>
+                  <Icon icon={faThumbsDown} />
+                </Button>
 
-              {/* TODO: Current vote count */}
-            </VoteBtnWrapper>
+                {/* Current vote count */}
+              </VoteBtnWrapper>
+              <VoteCount count={showObj.votes}>{showObj.votes} votes</VoteCount>
+            </div>
           ) : (
             <ClickAwayListener clickAwayCallBack={closeListMenu}>
               {/* List options dropdown */}
@@ -193,7 +207,6 @@ const ShowCard = (props) => {
         </TitleWrapper>
 
         {/* <Title>{name}</Title> */}
-        <Language>{language}</Language>
 
         <Summary>{formattedSummary}</Summary>
       </CardContent>
@@ -266,11 +279,25 @@ const GenresContainer = styled.div`
 const Genre = styled.p`
   padding: 5px;
   margin: 0px;
+  margin-right: 3px;
   border-radius: 5px;
   font-size: 0.8rem;
   color: ${grey};
   background-color: ${black2};
-  margin-right: 3px;
+`;
+
+const TopTen = styled.p`
+  position: absolute;
+  margin: 10px;
+  top: 0px;
+  left: 0px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: ${white};
+  background-color: ${red};
 `;
 
 // Score
@@ -285,6 +312,23 @@ const Score = styled.p`
   font-size: 0.5rem;
   border-radius: 5px;
   color: ${grey};
+`;
+
+const VoteCount = styled.p`
+  margin: 3px 0px;
+  font-size: 0.7rem;
+  padding: 3px;
+  text-align: right;
+
+  ${({ count }) => {
+    return count >= 0
+      ? css`
+          color: ${green};
+        `
+      : css`
+          color: ${red};
+        `;
+  }}
 `;
 
 // Button styles

@@ -10,15 +10,18 @@ const SearchResults = () => {
   return (
     <div>
       {showsData && showsData.length > 0 && <Title>Search results</Title>}
-      <Container>
-        {showsData.map((showObj) => (
-          <ShowCard
-            key={`searchResult-${showObj.show.id}`}
-            showObj={showObj}
-            favorite={false}
-          />
-        ))}
-      </Container>
+
+      {showsData && showsData.length > 0 && (
+        <Container>
+          {showsData.map((showObj) => (
+            <ShowCard
+              key={`searchResult-${showObj.show.id}`}
+              showObj={showObj}
+              favorite={false}
+            />
+          ))}
+        </Container>
+      )}
     </div>
   );
 };
