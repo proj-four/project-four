@@ -7,7 +7,6 @@ import {
   grey,
   white,
   red,
-  orange,
   green,
 } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

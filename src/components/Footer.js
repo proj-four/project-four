@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, grey, black, black2, cyan2 } from "../variables/colors";
+import { grey, black, cyan2 } from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
