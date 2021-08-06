@@ -8,6 +8,7 @@ import Header from "./Header";
 import SearchResults from "./SearchResults";
 import ShowList from "./ShowList";
 import Loading from "./Loading";
+import styled from "styled-components";
 
 function App() {
   // Saves user's search results
@@ -66,10 +67,12 @@ function App() {
             {/* Connect this to the loading component */}
             {!isFirebaseLoaded && <Loading />}
             <Header />
+
             <main>
               <SearchResults />
               <ShowList />
             </main>
+
             <Footer />
           </OuterWrapper>
         </ShowsDataContext.Provider>
