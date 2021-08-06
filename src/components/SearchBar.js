@@ -3,18 +3,40 @@ import styled, { css } from "styled-components/macro";
 import axios from "axios";
 import { baseUrl, apiKey } from "../variables/api";
 import ShowsDataContext from "../contexts/ShowsDataContext";
-import { black, black2, cyan2, white } from "../variables/colors";
+import {
+  black,
+  black2,
+  cyan2,
+  white,
+  red,
+  grey,
+  black1,
+} from "../variables/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { IconBtn } from "./Buttons";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [, setShowsData] = useContext(ShowsDataContext);
+  const [showsData, setShowsData] = useContext(ShowsDataContext);
+
+  // Tracks whether the API has loaded or not
+  const [isApiLoaded, setIsApiLoaded] = useState(false);
+
+  // Tracks if there is an API error
+  const [apiLoadError, setApiLoadError] = useState(false);
+
+  // Tracks when search begins and completes
+  const [isSearching, setIsSearching] = useState(false);
 
   const handleChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
+
+    // Reset api loading states
+    setIsApiLoaded(false);
+    setApiLoadError(false);
+    setIsSearching(true);
 
     axios({
       url: `${baseUrl}/search/shows`,
@@ -28,15 +50,17 @@ const SearchBar = () => {
       .then((res) => {
         if (res.request.status === 200) {
           setShowsData(res.data);
+          setIsApiLoaded(true);
+          setIsSearching(false);
         } else {
           throw new Error(res);
         }
       })
       .catch((err) => {
-        // TODO: error handling
-        // No results found -> what to show in the UI?
-        // Any other error -> what to show in the UI?
-        console.log(err);
+        // Update loading error states to then prompt an error message to the user
+        setIsApiLoaded(true);
+        setApiLoadError(true);
+        setIsSearching(false);
       });
   };
 
@@ -47,10 +71,13 @@ const SearchBar = () => {
   const handleReset = (e) => {
     setSearchQuery("");
     setShowsData([]);
+    setIsApiLoaded(false);
+    setApiLoadError(false);
+    setIsSearching(false);
   };
 
   return (
-    <div>
+    <Container>
       <form>
         <SearchField>
           <SearchInput
@@ -59,6 +86,8 @@ const SearchBar = () => {
             id="search"
             value={searchQuery}
             onChange={handleChange}
+            searchResults={showsData.length}
+            searchQuery={searchQuery}
           />
           <SearchLabel htmlFor="search" input={searchQuery}>
             Search shows
@@ -74,13 +103,39 @@ const SearchBar = () => {
           </BtnContainer>
         </SearchField>
       </form>
-    </div>
+
+      <ErrorContainer>
+        {/* Prompt the users that a search is occurring */}
+        {isSearching && (
+          <SearchingContainer>
+            <Searching>Searching for results...</Searching>
+          </SearchingContainer>
+        )}
+
+        {/* Show no results if: (1) API has loaded and (2) There was no api loading error (3) Search results return nothing (4) User has entered a search query */}
+        {isApiLoaded &&
+          !apiLoadError &&
+          showsData.length === 0 &&
+          searchQuery !== "" && (
+            <NoResultsMessage>No results found</NoResultsMessage>
+          )}
+
+        {/* Show api loading error if (1) User submitted a search (2) the API has loaded (3) There was a loading error thrown */}
+        {searchQuery !== "" && isApiLoaded && apiLoadError && (
+          <ApiLoadingError>Error fetching search results.</ApiLoadingError>
+        )}
+      </ErrorContainer>
+    </Container>
   );
 };
 
 export default SearchBar;
 
 const spacing = "18.5px 14px";
+
+const Container = styled.div`
+  position: relative;
+`;
 
 const SearchField = styled.div`
   position: relative;
@@ -108,6 +163,24 @@ const SearchInput = styled.input`
     outline: none;
     border-radius: 5px;
   }
+
+  /* Styles applied to input box when there are no search results / there is an error getting search results and the search is complete */
+  ${({ searchResults, searchQuery }) => {
+    return (
+      searchQuery !== "" &&
+      searchResults === 0 &&
+      css`
+        margin: 0px;
+        border: 2px solid ${red};
+
+        &:active,
+        &:focus,
+        &:hover {
+          border-color: ${red};
+        }
+      `
+    );
+  }}
 `;
 
 const SearchLabel = styled.label`
@@ -165,3 +238,36 @@ const Vertical = styled.div`
 `;
 
 const Icon = styled(FontAwesomeIcon)``;
+
+// Error styles
+
+const ErrorContainer = styled.div`
+  margin: 5px;
+  position: absolute;
+  left: 0px;
+  bottom: -45px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  @media (max-width: 400px) {
+    bottom: -65px;
+  }
+`;
+
+const NoResultsMessage = styled.p`
+  margin: 0px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: ${grey};
+  background-color: ${black2};
+`;
+
+const ApiLoadingError = styled(NoResultsMessage)`
+  background-color: ${red};
+  color: ${black1};
+`;
+
+const SearchingContainer = styled.div``;
+
+const Searching = styled(NoResultsMessage)``;

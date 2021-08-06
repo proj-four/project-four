@@ -20,4 +20,8 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 660px) {
+    flex-direction: column;
+  }
 `;
