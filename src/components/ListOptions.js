@@ -32,8 +32,8 @@ const ListOptionsWrapper = styled.ul`
   background-color: #0d0d0d;
   color: white;
   z-index: 10;
-  top: 34px;
-  right: -97px;
+  bottom: 60px;
+  right: 10px;
   margin-left: -10px;
   border-radius: 10px;
   overflow: hidden;
