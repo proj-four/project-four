@@ -37,18 +37,43 @@ const DescriptionContainer = styled.div`
   padding: 30px;
   border-radius: 20px;
   margin-bottom: 10px;
+
+  @media (max-width: 660px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 410px) {
+    padding: 10px;
+  }
 `;
 
 const Heading = styled.h1`
   color: ${white};
   font-size: 4rem;
   margin: 10px;
+
+  @media (max-width: 660px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 2rem;
+    margin: 5px;
+  }
 `;
 
 const Description = styled.h2`
   color: ${white};
   font-size: 2rem;
   margin: 10px 0px 50px 0px;
+
+  @media (max-width: 660px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 410px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const CallToAction = styled.p`

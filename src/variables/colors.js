@@ -7,6 +7,7 @@ export const black = "rgb(0, 0, 0)";
 export const white = "rgb(255, 255, 255)";
 export const red = "rgb(255, 72, 72)";
 export const green = "rgb(157, 218, 198)";
+export const orange = "rgb(245,169,98)";
 
 const colors = {
   black1: black1,

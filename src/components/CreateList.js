@@ -87,6 +87,15 @@ const Wrapper = styled.div`
   &:hover {
     width: 300px;
   }
+
+  @media (max-width: 440px) {
+    width: 100%;
+
+    &:focus-within,
+    &:hover {
+      width: 100%;
+    }
+  }
 `;
 
 const spacing = "18.5px 14px";
