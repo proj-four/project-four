@@ -10,6 +10,10 @@ const Title = styled.h2`
   margin: 0;
   border-top: 5px solid ${black1};
   text-transform: capitalize;
+
+  @media (max-width: 660px) {
+    font-size: 2rem;
+  }
 `;
 
 export default Title;

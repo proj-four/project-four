@@ -232,6 +232,10 @@ const Card = styled.li`
   background-color: ${black1};
   border-radius: 5px;
   position: relative;
+
+  @media (max-width: 660px) {
+    width: 180px;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -264,6 +268,11 @@ const Image = styled.img`
   object-position: center center;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+
+  @media (max-width: 660px) {
+    width: 180px;
+    height: 241px;
+  }
 `;
 
 // Genres
@@ -338,6 +347,13 @@ const VoteBtnWrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
   justify-items: end;
   column-gap: 5px;
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 0px;
+    row-gap: 5px;
+  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -406,6 +422,11 @@ const Title = styled.h3`
   font-size: 1.5rem;
   font-weight: bold;
   color: ${white};
+
+  @media (max-width: 660px) {
+    font-size: 1.2rem;
+    width: 100px;
+  }
 `;
 
 const Summary = styled.p`

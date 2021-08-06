@@ -243,13 +243,16 @@ const Icon = styled(FontAwesomeIcon)``;
 
 const ErrorContainer = styled.div`
   margin: 5px;
-
   position: absolute;
   left: 0px;
   bottom: -45px;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
+
+  @media (max-width: 400px) {
+    bottom: -65px;
+  }
 `;
 
 const NoResultsMessage = styled.p`
