@@ -7,7 +7,7 @@ import OuterWrapper from "./OuterWrapper.styled";
 import Header from "./Header";
 import SearchResults from "./SearchResults";
 import ShowList from "./ShowList";
-
+import Loading from "./Loading";
 
 function App() {
   // Saves user's search results
@@ -64,7 +64,7 @@ function App() {
         <ShowsDataContext.Provider value={[showsData, setShowsData]}>
           <OuterWrapper>
             {/* Connect this to the loading component */}
-            {!isFirebaseLoaded && <p>Loading</p>}
+            {!isFirebaseLoaded && <Loading />}
             <Header />
             <main>
               <SearchResults />
