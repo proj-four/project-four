@@ -18,9 +18,7 @@ The following features exist:
 
 ### Project status
 
-I am constantly looking to improve this project; therefore, this project is currently in development. 
-
-Currently working on the following features:
+While the minimum viable product is complete, we are always looking to continuously improve and develop our app. Below are some of the features we are working to incorporate: 
 * Improving user accessibility (i.e. to improve UX when using keyboard or a screen-readers)
 * Creating a model to display TV show details
 * Making small bug fixes 
@@ -62,28 +60,4 @@ The project is a group project developed at Juno College's Web Development Bootc
 
 Our technical challenge was managing the app's architecture and data infrastructure to ensure our team was working harmoniously. To overcome this challenge, we developed a flowchart of the app's infrastructure to provide the team with a clear view of the app (see flowchart below). After getting a clear view of the app, we made key decisions regarding the app's data flow. This ensured a smooth workflow within our team.
 
-![Show MAK data architechture flowchart](https://github.com/proj-four/project-four/blob/main/src/assets/projectArchitectureFlowchart.png)
-
-## Licence
-
-MIT License
-
-Copyright (c) 2021 Kaunain Karmali
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+![Show MAK data architecture flowchart](https://github.com/proj-four/project-four/blob/main/src/assets/projectArchitectureFlowchart.png)
