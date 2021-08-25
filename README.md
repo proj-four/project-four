@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Show MAK
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
 
-## Available Scripts
+### Description
 
-In the project directory, you can run:
+Show MAK is a group project developed by Abdulkadir Musse, Mao Kitamura, and Kaunain Karmali designed to help users decide which tv show to start binge-watching next! Users can use the search bar to find TV Shows. Multiple custom lists can be created to add or remove shows. Users can upvote or downvote shows to affect their top 10 list.
 
-### `npm start`
+### Key features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The following features exist:
+* Search for TV shows to fetch shows from the TVmaze API
+* Includes error handling to alert the user if no results are found or errors occur when making fetch calls
+* API loading states displayed to user 
+* Create multiple favourites list
+* Add and remove shows from one or more lists
+* Upvote and downvote shows 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Project status
 
-### `npm test`
+I am constantly looking to improve this project; therefore, this project is currently in development. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Currently working on the following features:
+* Improving user accessibility (i.e. to improve UX when using keyboard or a screen-readers)
+* Creating a model to display TV show details
+* Making small bug fixes 
+* Making the site more pixel perfect!
 
-### `npm run build`
+## Getting started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Begin using the app by performing the following:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone down this repository. You will need `node` or `nodemon` and `npm` installed globally on your machine.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Begin running the app in your terminal
+  * Run `npm i` to install dependencies
+  * Run `npm start` while in the client folder
 
-### `npm run eject`
+3. To visit and use the app:
+  * Go to `localhost:3000` on your browser
+  * Create a list
+  * Search shows in the search bar
+  * Add a show!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technology used
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The following technology was used in the development of Show MAK:
+* HTML5
+* CSS
+* JavaScript (ES6)
+* React
+* Styled components library
+* TVmaze API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Reflection
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### How we got started
 
-## Learn More
+The project is a group project developed at Juno College's Web Development Bootcamp. Our client is a TV Shows fan (just as we are!) and was looking for an app to help them search for their next show to binge watch.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Technical challenge
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Our technical challenge was managing the app's architecture and data infrastructure to ensure our team was working harmoniously. To overcome this challenge, we developed a flowchart of the app's infrastructure to provide the team with a clear view of the app (see flowchart below). After getting a clear view of the app, we made key decisions regarding the app's data flow. This ensured a smooth workflow within our team.
 
-### Code Splitting
+![Show MAK data architechture flowchart](https://github.com/proj-four/project-four/blob/main/src/assets/projectArchitectureFlowchart.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Licence
 
-### Analyzing the Bundle Size
+MIT License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Copyright (c) 2021 Kaunain Karmali
 
-### Making a Progressive Web App
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
