@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 //  - https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
 
 const ClickAwayListener = (props) => {
-  // Tracks the div HTML element under ref.current when it is assigned to the ref attribute in an HTML elemnt
+  // Tracks the div HTML element under ref.current when it is assigned to the ref attribute in an HTML element
   const ref = useRef(null);
 
   const { clickAwayCallBack } = props;
