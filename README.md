@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Show MAK
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
 
-## Available Scripts
+### Description
 
-In the project directory, you can run:
+Show MAK is a group project developed by Abdulkadir Musse, Mao Kitamura, and Kaunain Karmali designed to help users decide which tv show to start binge-watching next! Users can use the search bar to find TV Shows. Multiple custom lists can be created to add or remove shows. Users can upvote or downvote shows to affect their top 10 list.
 
-### `npm start`
+### Key features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The following features exist:
+* Search for TV shows to fetch shows from the TVmaze API
+* Includes error handling to alert the user if no results are found or errors occur when making fetch calls
+* API loading states displayed to user 
+* Create multiple favourites list
+* Add and remove shows from one or more lists
+* Upvote and downvote shows 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Project status
 
-### `npm test`
+While the minimum viable product is complete, we are always looking to continuously improve and develop our app. Below are some of the features we are working to incorporate: 
+* Improving user accessibility (i.e. to improve UX when using keyboard or a screen-readers)
+* Creating a model to display TV show details
+* Making small bug fixes 
+* Making the site more pixel perfect!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting started
 
-### `npm run build`
+Begin using the app by performing the following:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone down this repository. You will need `node` or `nodemon` and `npm` installed globally on your machine.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Begin running the app in your terminal
+  * Run `npm i` to install dependencies
+  * Run `npm start` while in the client folder
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. To visit and use the app:
+  * Go to `localhost:3000` on your browser
+  * Create a list
+  * Search shows in the search bar
+  * Add a show!
 
-### `npm run eject`
+## Technology used
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The following technology was used in the development of Show MAK:
+* HTML5
+* CSS
+* JavaScript (ES6)
+* React
+* Styled components library
+* TVmaze API
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Reflection
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### How we got started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The project is a group project developed at Juno College's Web Development Bootcamp. Our client is a TV Shows fan (just as we are!) and was looking for an app to help them search for their next show to binge watch.
 
-## Learn More
+### Technical challenge
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Our technical challenge was managing the app's architecture and data infrastructure to ensure our team was working harmoniously. To overcome this challenge, we developed a flowchart of the app's infrastructure to provide the team with a clear view of the app (see flowchart below). After getting a clear view of the app, we made key decisions regarding the app's data flow. This ensured a smooth workflow within our team.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Show MAK data architecture flowchart](https://github.com/proj-four/project-four/blob/main/src/assets/projectArchitectureFlowchart.png)
